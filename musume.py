@@ -62,7 +62,8 @@ can_move_left(returned_rows)
 
 #四方の要素の確認
 def element_checker_left():
-    if False:
+    
+    if (can_move_left()):
         left_element = rows(x1-1, y1)
     else:
         return False
@@ -75,7 +76,7 @@ def vacant_checker_y():
     else:
        return False
 
-def
+
 
 def move_element_checker_left():
     if (left_element == 6 
@@ -87,9 +88,4 @@ def move_element_checker_left():
     
     elif (left_element ==1 or 2 or 3 or 4):
         vacant_checker_y()
-    
-    elif  (left_element == 5):
-        
-    
-
         
