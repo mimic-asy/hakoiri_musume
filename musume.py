@@ -1,6 +1,10 @@
+
+from sqlite3 import Row
+from turtle import end_fill
 import numpy as np
 
-def swap(rows, x1, y1, x2, y2):
+
+def swap(rows, y1, x1, y2, x2):
     rows[y1, x1], rows[y2, x2] = rows[y2, x2], rows[y1, x1]
 
 
@@ -9,8 +13,8 @@ def init_puzzle():
     Sohu= 1
     Sobo= 2
     Chichi= 3
-    Kyodai = 4
-    Haha= 5
+    Haha = 4
+    Kyodai= 5
     Sado= 6
     Syodo= 7
     Kado= 8
@@ -25,8 +29,67 @@ def init_puzzle():
         [Kado  , Vacant,  Vacant, Budo]
     ])
 
-    print(rows)
-    swap(rows, 3, 4, 2, 4)
-    print(rows)
+    return rows    
 
-init_puzzle()
+# "X" はvacantのx座標、”Y”には、y座標が入る
+#箱に入っている要素の判定
+def can_move_left(X):
+    if X- 1 < -1:
+        return True
+    else:
+        return False
+
+def can_move_right(X):
+    if X + 1  > 3:
+        return True
+    else:
+        return False
+
+def can_move_up(Y):
+    if Y - 1 < -1:
+        return True
+    else:
+        return False
+
+def can_move_down(Y):
+    if Y + 1 > 3:
+        return True
+    else:
+        return False
+
+returned_rows = init_puzzle()
+can_move_left(returned_rows)
+
+#四方の要素の確認
+def element_checker_left():
+    if False:
+        left_element = rows(x1-1, y1)
+    else:
+        return False
+
+
+def vacant_checker_y():
+    if (row(x1,y1+1) == -1
+    or row(x1,y1-1 == -1)):
+        return True
+    else:
+       return False
+
+def
+
+def move_element_checker_left():
+    if (left_element == 6 
+        or left_element == 7 
+        or left_element == 8 
+        or left_element == 9):
+       
+       return True
+    
+    elif (left_element ==1 or 2 or 3 or 4):
+        vacant_checker_y()
+    
+    elif  (left_element == 5):
+        
+    
+
+        
