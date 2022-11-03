@@ -1,12 +1,7 @@
-
-from sqlite3 import Row
-from turtle import end_fill
 import numpy as np
-
-
 def swap(rows, y1, x1, y2, x2):
     rows[y1, x1], rows[y2, x2] = rows[y2, x2], rows[y1, x1]
-
+#
 
 def init_puzzle():
     Musume= 0
@@ -31,61 +26,46 @@ def init_puzzle():
 
     return rows    
 
-# "X" はvacantのx座標、”Y”には、y座標が入る
-#箱に入っている要素の判定
-def can_move_left(X):
-    if X- 1 < -1:
-        return True
+#print(init_puzzle())
+#入力された数字が使用可能か判断する関数
+def swap_check():
+    val  = input("動かしたい数字を入力してね")
+    if val.isdigit():
+        a = int(val)
+        if -1 < a < 10:
+            return a
+        if a <-1 or 10 < a:
+            print("０から９までの数字を入力してね")
+            return None
+
     else:
-        return False
+        print("０から９までの数字を入力してね")
+        return None
 
-def can_move_right(X):
-    if X + 1  > 3:
-        return True
-    else:
-        return False
+swap_check()   
+#−１はどこにあるかどうかを調べる。
+def erea_check(rows,a):
+    ys,xs =np.where(rows == -1)
+    x1 = xs[0]
+    x2 = xs[1]
+    y1 = ys[0]
+    y2 = ys[1]
+    #一つ目の−１の位置
+    vacant1 = [y1,x1]
+    #2つ目の−１の位置
+    vacant2 = [y2,x2]
+    return x1,y1,x2,y2
 
-def can_move_up(Y):
-    if Y - 1 < -1:
-        return True
-    else:
-        return False
+#-1の隣に入力した要素があるかどうかを判別する
+def side_or_notside(rows,a,x1,y1,x2,y2):
+    if (x1- 1 > -1):
+        left = rows[x1-1,y1]
+    if (x1+ 1 < 4):
+        right = rows[x1+1,y1]
+    if (y1+ 1 <5):
+        low = rows[x1,y1+1]
+    if (y1- 1 <-1):
+        high = rows[x1,y1-1]
 
-def can_move_down(Y):
-    if Y + 1 > 3:
-        return True
-    else:
-        return False
-
-returned_rows = init_puzzle()
-can_move_left(returned_rows)
-
-#四方の要素の確認
-def element_checker_left():
     
-    if (can_move_left()):
-        left_element = rows(x1-1, y1)
-    else:
-        return False
 
-
-def vacant_checker_y():
-    if (row(x1,y1+1) == -1
-    or row(x1,y1-1 == -1)):
-        return True
-    else:
-       return False
-
-
-
-def move_element_checker_left():
-    if (left_element == 6 
-        or left_element == 7 
-        or left_element == 8 
-        or left_element == 9):
-       
-       return True
-    
-    elif (left_element ==1 or 2 or 3 or 4):
-        vacant_checker_y()
-        
