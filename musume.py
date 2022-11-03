@@ -56,16 +56,47 @@ def erea_check(rows,a):
     vacant2 = [y2,x2]
     return x1,y1,x2,y2
 
-#-1の隣に入力した要素があるかどうかを判別する
+#上下左右を判定し、配列外の場合、Falseを返す
+def  sidecheck(rows,x,y):
+    flag1 =rows[y,x-1]
+    flag2 =rows[y,x+1]
+    flag3 =rows[y-1,x]
+    flag4 =rows[y+1,x]
+    flag5 =99
+
+
+    if x-1 >0:
+        return True, flag1,11
+    if x+1 <5:
+        return True,flag2,22
+    if y-1 >0:
+        return True,flag3,33
+    if y+1 <5:
+        return True,flag4,44
+    else:
+        print("この数字は動かせません、他の数字を入力してください")
+        return False,flag5,55
+# aはどのような場合に移動できるかを定める関数
+def sidebyside(rows,a,y1,x1,y2,x2):
+    if a == 6 or 7 or 8 or 9:
+        swap(rows, y1, x1, y2, x2)
+
+
+
+
+#上下、もしくは左右に移動可能な場合、aがvacantと隣接しているかを確認する
 def side_or_notside(rows,a,x1,y1,x2,y2):
-    if (x1- 1 > -1):
-        left = rows[x1-1,y1]
-    if (x1+ 1 < 4):
-        right = rows[x1+1,y1]
-    if (y1+ 1 <5):
-        low = rows[x1,y1+1]
-    if (y1- 1 <-1):
-        high = rows[x1,y1-1]
+    point1 = sidecheck(rows,y1,x1)
+    point2 = sidecheck(rows,y2,x2)
+  
+
+        
+    
+        
+
+
+
+        
 
     
 
