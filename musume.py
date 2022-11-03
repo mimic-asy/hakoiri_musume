@@ -26,21 +26,27 @@ def init_puzzle():
 
     return rows    
 
-#print(init_puzzle())
-#入力された数字が使用可能か判断する関数
-def swap_check():
-    val  = input("動かしたい数字を入力してね")
+def swap_check2(val):
+
     if val.isdigit():
         a = int(val)
         if -1 < a < 10:
             return a
-        if a <-1 or 10 < a:
+        else:
             print("０から９までの数字を入力してね")
             return None
-
     else:
         print("０から９までの数字を入力してね")
         return None
+
+    assert False
+
+#print(init_puzzle())
+#入力された数字が使用可能か判断する関数
+def swap_check():
+    val  = input("動かしたい数字を入力してね")
+    swap_check2(val)
+
 
 #−１はどこにあるかどうかを調べる。
 def erea_check(rows):
