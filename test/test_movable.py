@@ -31,17 +31,3 @@ def init_puzzle():
     return rows    
 
 
-
-def can_move_left(x1):
-    if (x1- 1 > -1):
-        return True
-    else:
-        return Falsed
-
-
-def swap_checker(x1,y1,rows):
-    if can_move_left(x1) == True:
-        swapx_plus = x1 + 1
-        swap_check_left = rows[y1,swapx_plus]
-
-        return swap_check_left
