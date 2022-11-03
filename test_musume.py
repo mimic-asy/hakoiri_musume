@@ -1,5 +1,15 @@
 import musume
 import numpy as np
+import io
+
+def test_swap_check2():
+    assert musume.swap_check2("a") is None
+    assert musume.swap_check2("1") == 1
+    assert musume.swap_check2("99") is None
+    assert musume.swap_check2("-1") is None
+    assert musume.swap_check2("0") == 0
+    assert musume.swap_check2("9") == 9
+    assert musume.swap_check2("10") is None
 
 def test_erea_check():
     rows0 = np.array([
