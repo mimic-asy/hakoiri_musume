@@ -42,9 +42,8 @@ def swap_check():
         print("０から９までの数字を入力してね")
         return None
 
-swap_check()   
 #−１はどこにあるかどうかを調べる。
-def erea_check(rows,a):
+def erea_check(rows):
     ys,xs =np.where(rows == -1)
     x1 = xs[0]
     x2 = xs[1]
@@ -57,7 +56,7 @@ def erea_check(rows,a):
     return x1,y1,x2,y2
 
 #上下左右を判定し、配列外の場合、Falseを返す
-def  sidecheck(rows,x,y):
+def sidecheck(rows,x,y):
     flag1 =rows[y,x-1]
     flag2 =rows[y,x+1]
     flag3 =rows[y-1,x]
