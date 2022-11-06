@@ -50,9 +50,7 @@ def swap_check():
 
 #選択した数字はどこにあるかどうかを調べる。
 def area_check(rows,a):
-    A=np.where(rows == a)
-    yaxis= A[0]
-    xaxis= A[1]
+    yaxis, xaxis = np.where(rows == a)
     return [(y,x) for y,x in zip(yaxis,xaxis)]
 
 rows =init_puzzle()
