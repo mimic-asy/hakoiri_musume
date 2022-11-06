@@ -53,12 +53,7 @@ def area_check(rows,a):
     A=np.where(rows == a)
     yaxis= A[0]
     xaxis= A[1]
-    yaxis_and_xaxis=[]
-    for y,x in zip(yaxis,xaxis):
-        yaxis_and_xaxis.append((y,x))
-        
-    return yaxis_and_xaxis
-
+    return [(y,x) for y,x in zip(yaxis,xaxis)]
 
 rows =init_puzzle()
 print(area_check(rows,0))
