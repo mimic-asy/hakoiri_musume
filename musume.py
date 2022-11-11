@@ -49,9 +49,104 @@ def swap_check():
 
 
 #選択した数字はどこにあるかどうかを調べる。
+
 def area_check(rows,a):
     yaxis, xaxis = np.where(rows == a)
     return [(y,x) for y,x in zip(yaxis,xaxis)]
 
-rows =init_puzzle()
-print(area_check(rows,0))
+if __name__ == "__main__":
+    rows = init_puzzle()
+    print(area_check(rows,0))
+
+#範囲内か調べる関数
+def right_check(x):
+    #右側が範囲内であることを示す
+    if x+1<4:
+        return True
+    else:
+        return False
+def left_check(x):
+    #左側が範囲内であることを示す
+    if x-1<-1:
+        return True
+    else:
+        return False
+def top_check(y):
+    #上が範囲内であることを示す
+    if y-1<-1:
+        return True
+    else:
+        return False
+def down_check(y):
+    #下側が範囲内であることを示す
+    if y+1<5:
+        return True
+    else:
+        return False
+#隣が−１か調べる関数
+def vacant_check_right(rows,x1,y1):
+    if rows[y1,x1+1] == -1:
+        return  True
+    else:
+        return False
+def vacant_check_left(rows,x1,y1):
+    if rows[y1,x1-1] == -1:
+        return True
+    else:
+        return False
+def vacant_check_top(rows,x1,y1):
+    if rows[y1-1,x1] == -1:
+        return True
+    else:
+        return False
+def vacant_check_down(rows,x1,y1):
+    if rows[y1+1,x1] == -1:
+        return True
+    else:
+        return False
+
+#1*2のマスを動かす関数
+def hight_move(rows,x1,y1,x2,y2):
+
+    if right_check(x1) and vacant_check_right(rows,x1,y1) and vacant_check_right(rows,x2,y2):
+        swap(rows,y1, x1, y1, x1+1)
+        swap(rows,y2, x2, y2, x2+1)
+
+
+    if left_check(x1) and vacant_check_left(rows,x1,y1) and vacant_check_left(rows,x2,y2):
+        swap(rows,y1, x1, y1, x1-1)
+        swap(rows,y2, x2, y2, x2-1)
+
+    if top_check(y1) and    vacant_check_top(rows,x1,y1) and vacant_check_top(rows,x2,y2):
+        swap(rows, y1, x1, y1-1, x1)
+        swap(rows, y2, x2, y2-1, x2)
+
+    if down_check(y2) and vacant_check_down(rows,x1,y1) and vacant_check_down(rows,x2,y2):
+        swap(rows, y1, x1, y1+1, x1)
+        swap(rows, y2, x2, y2+1, x2)
+
+    else:
+        print("この数字は動かせません、動かせる数字を選んでください")
+        return False
+#2*1のマスを動かす関数
+def wide_move(rows,x1,y1,x2,y2):
+    if top_check(y1) and   vacant_check_top(rows,x1,y1) and vacant_check_top(rows,x2,y2):
+        swap(rows, y1, x1, y1-1, x1)
+        swap(rows, y2, x2, y2-1,x2)
+
+
+    if #下側が範囲内で両方の上側が−１の時
+
+    if #xを比較し、小さい方のxを持つ位置の左側が−１の時
+
+    if #xを比較し、大きい方のxを持つ位置の右側が−１の時
+
+#2*2のマスを動かす関数
+def  musume_swap():
+    if #右側が範囲内で両方の右側が−１の時
+
+    if #左側が範囲内で両方の左側が−１の時
+
+    if #上側が範囲内で、両方の上側が−１の時
+
+    if #下側が範囲内で両方の上側が−１の時
