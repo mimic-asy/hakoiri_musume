@@ -83,6 +83,7 @@ def down_check(y):
         return True
     else:
         return False
+
 #隣が−１か調べる関数
 def vacant_check_right(rows,x1,y1):
     if rows[y1,x1+1] == -1:

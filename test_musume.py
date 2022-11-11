@@ -32,3 +32,13 @@ def test_right_check():
     assert musume.top_check(0) == False
     assert musume.down_check(0) == True
 
+def test_vacant_check_right():
+    a = np.array([
+        [1,-1,0,7],
+        [1,-1,0,7],
+        [4,2,2,3],
+        [4,5,6,3]
+    ])
+    assert musume.vacant_check_down(a,0,0) ==False
+    assert musume.vacant_check_down(a,0,1) == False
+    assert musume.vacant_check_down(a,1,2) == False
