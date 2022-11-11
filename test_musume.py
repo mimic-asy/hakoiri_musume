@@ -20,3 +20,15 @@ def test_area_check():
     ])
     assert musume.area_check(a,0) == [(0,0),(0,1),(0,2),(0,3)]
 
+def test_right_check():
+    a = np.array([
+        [1,0,0,7],
+        [1,0,0,7],
+        [4,2,2,3],
+        [4,5,6,3]
+    ])
+    assert musume.right_check(0) == True
+    assert musume.left_check(0) == False
+    assert musume.top_check(0) == False
+    assert musume.down_check(0) == True
+

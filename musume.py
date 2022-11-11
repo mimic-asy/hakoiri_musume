@@ -134,19 +134,30 @@ def wide_move(rows,x1,y1,x2,y2):
         swap(rows, y1, x1, y1-1, x1)
         swap(rows, y2, x2, y2-1,x2)
 
+    if down_check(y2) and vacant_check_down(rows,x1,y1) and vacant_check_down(rows,x2,y2):
+        swap(rows, y1, x1, y1+1, x1)
+        swap(rows, y2, x2, y2+1, x2)
 
-    if #下側が範囲内で両方の上側が−１の時
+    if right_check(x1) and vacant_check_right(rows,x1,y1) and vacant_check_right(rows,x2,y2):
+        swap(rows, y1, x1, y1, x1+1)
+        swap(rows, y2, x2, y2, x2+1)
 
-    if #xを比較し、小さい方のxを持つ位置の左側が−１の時
-
-    if #xを比較し、大きい方のxを持つ位置の右側が−１の時
+    if left_check(x2) and vacant_check_left(rows,x1,y1) and vacant_check_left(rows,x2,y2):
+        swap(rows, y1, x1, y1, x1-1)
+        swap(rows, y2, x2, y2, x2-1)
 
 #2*2のマスを動かす関数
-def  musume_swap():
-    if #右側が範囲内で両方の右側が−１の時
+"""""
+def  musume_swap(rows,x1,y1,x2,y2,x3,y3,x4,y4):
+    if right_check(x1) and vacant_check_right(rows,x1,y1) and vacant_check_right(rows,x2,y2) and vacant_check_right(rows,x3,y3) and vacant_check_right(rows,x4,y4):
+        swap(rows,y1, x1, y1, x1+1)
+        swap(rows,y2, x2, y2, x2+1)
+        swap(rows,y3, x3, y3, x3+1)
+        swap(rows,y4, x4, y4, x4+1)
 
-    if #左側が範囲内で両方の左側が−１の時
+    if left_check(x1) and vacant_check_left(rows,x1,y1) and vacant_check_left(rows,x1,y1)
 
     if #上側が範囲内で、両方の上側が−１の時
 
     if #下側が範囲内で両方の上側が−１の時
+    """
