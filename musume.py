@@ -58,7 +58,7 @@ if __name__ == "__main__":
     rows = init_puzzle()
     print(area_check(rows,0))
 
-#範囲内か調べる関数
+#範囲内か調べる関数（テスト済み）
 def right_check(x):
     #右側が範囲内であることを示す
     if x+1<4:
@@ -67,13 +67,13 @@ def right_check(x):
         return False
 def left_check(x):
     #左側が範囲内であることを示す
-    if x-1<-1:
+    if x-1>-1:
         return True
     else:
         return False
 def top_check(y):
     #上が範囲内であることを示す
-    if y-1<-1:
+    if y-1>-1:
         return True
     else:
         return False
@@ -84,7 +84,7 @@ def down_check(y):
     else:
         return False
 
-#隣が−１か調べる関数
+#隣が−１か調べる関数(テスト済み)
 def vacant_check_right(rows,x1,y1):
     if rows[y1,x1+1] == -1:
         return  True
@@ -99,14 +99,15 @@ def vacant_check_top(rows,x1,y1):
     if rows[y1-1,x1] == -1:
         return True
     else:
-        return False
+        print(rows[y1-1,x1])
+
 def vacant_check_down(rows,x1,y1):
     if rows[y1+1,x1] == -1:
         return True
     else:
         return False
 
-#1*2のマスを動かす関数
+#1*2のマスを動かす関数(テスト済み)
 def hight_move_right(rows,x1,y1,x2,y2):
     swap(rows,y1, x1, y1, x1+1)
     swap(rows,y2, x2, y2, x2+1)
@@ -142,36 +143,68 @@ def hight_move(rows,x1,y1,x2,y2):
   
     else:
         print("この数字は動かせません、動かせる数字を選んでください")
+
 #2*1のマスを動かす関数
 def wide_move(rows,x1,y1,x2,y2):
     if top_check(y1) and   vacant_check_top(rows,x1,y1) and vacant_check_top(rows,x2,y2):
         swap(rows, y1, x1, y1-1, x1)
         swap(rows, y2, x2, y2-1,x2)
+        print (rows)
 
-    if down_check(y2) and vacant_check_down(rows,x1,y1) and vacant_check_down(rows,x2,y2):
+    if down_check(y1) and vacant_check_down(rows,x1,y1) and vacant_check_down(rows,x2,y2):
         swap(rows, y1, x1, y1+1, x1)
         swap(rows, y2, x2, y2+1, x2)
+        print(rows)
 
     if right_check(x1) and vacant_check_right(rows,x1,y1) and vacant_check_right(rows,x2,y2):
         swap(rows, y1, x1, y1, x1+1)
         swap(rows, y2, x2, y2, x2+1)
+        print(rows)
 
     if left_check(x2) and vacant_check_left(rows,x1,y1) and vacant_check_left(rows,x2,y2):
         swap(rows, y1, x1, y1, x1-1)
         swap(rows, y2, x2, y2, x2-1)
+        print(rows)
+    else:
+        print("この数字は動かせません、他の数字を選んでね")
 
 #2*2のマスを動かす関数
-"""""
-def  musume_swap(rows,x1,y1,x2,y2,x3,y3,x4,y4):
-    if right_check(x1) and vacant_check_right(rows,x1,y1) and vacant_check_right(rows,x2,y2) and vacant_check_right(rows,x3,y3) and vacant_check_right(rows,x4,y4):
-        swap(rows,y1, x1, y1, x1+1)
-        swap(rows,y2, x2, y2, x2+1)
-        swap(rows,y3, x3, y3, x3+1)
-        swap(rows,y4, x4, y4, x4+1)
+def musume_move_right(rows,x1,y1,x2,y2,x3,y3,x4,y4):
+    if right_check(x2) and vacant_check_right(rows,x2,y2) and vacant_check_right(rows,x4,y4):
+        swap(rows,y2,x2,y2,x2+1)
+        swap(rows,y4,x4,y4,x4+1)
+        swap(rows,y1,x1,y1,x1+1)
+        swap(rows,y3,x3,y3,x3+1)
+        return rows
+def musume_move_left(rows,x1,y1,x2,y2,x3,y3,x4,y4):
+        swap(rows,y1, x1, y1, x1-1)
+        swap(rows,y3, x3, y3, x3-1)
+        swap(rows,y2, x2, y2, x2-1)
+        swap(rows,y4, x4, y4, x4-1)
+        return rows
+def musume_move_top(rows,x1,y1,x2,y2,x3,y3,x4,y4):
+        swap(rows,y1, x1, y1+1, x1)
+        swap(rows,y2, x2, y2+1, x2)
+        swap(rows,y3, x3, y3+1, x3)
+        swap(rows,y4, x4, y4+1, x4)
+        return rows
+def musume_move_downswap(rows,x1,y1,x2,y2,x3,y3,x4,y4):
+        swap(rows,y3, x3, y3-1, x3)
+        swap(rows,y2, x2, y2-1, x2)
+        swap(rows,y1, x1, y1-1, x1)
+        swap(rows,y4, x4, y4-1, x4)
+        return rows
 
-    if left_check(x1) and vacant_check_left(rows,x1,y1) and vacant_check_left(rows,x1,y1)
 
-    if #上側が範囲内で、両方の上側が−１の時
+def musume_swap(rows,x1,y1,x2,y2,x3,y3,x4,y4):
+    if right_check(x1) and vacant_check_right(rows,x2,y2) and vacant_check_right(rows,x4,y4):
+        musume_move_right(rows,x1,y1,x2,y2,x3,y3,x4,y4)
 
-    if #下側が範囲内で両方の上側が−１の時
-    """
+    if left_check(x1) and vacant_check_left(rows,x1,y1) and vacant_check_left(rows,x3,y3):
+        musume_move_left(rows,x1,y1,x2,y2,x3,y3,x4,y4)
+
+    if top_check(y1) and vacant_check_top(rows,x1,y1) and vacant_check_top(rows,x2,y2):
+        musume_move_top(rows,x1,y1,x2,y2,x3,y3,x4,y4)
+    
+    if down_check(y3) and vacant_check_down(rows,x3,y3) and vacant_check_down(rows,x4,y4):
+        musume_move_downswap(rows,x1,y1,x2,y2,x3,y3,x4,y4)
