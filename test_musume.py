@@ -46,7 +46,7 @@ def test_vacant_check_right():
 def test_move():
     
     rows = np.array([
-        [ 9, -1,-1, 3], 
+        [ 9, -1,-1, 3],
         [ 9,  0, 0, 3],
         [ 4 , 0, 0, 5],
         [ 4 , 6, 6, 5],

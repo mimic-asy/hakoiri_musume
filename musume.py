@@ -195,7 +195,6 @@ def musume_move_downswap(rows,x1,y1,x2,y2,x3,y3,x4,y4):
         swap(rows,y4, x4, y4-1, x4)
         return rows
 
-
 def musume_swap(rows,x1,y1,x2,y2,x3,y3,x4,y4):
     if right_check(x1) and vacant_check_right(rows,x2,y2) and vacant_check_right(rows,x4,y4):
         musume_move_right(rows,x1,y1,x2,y2,x3,y3,x4,y4)
