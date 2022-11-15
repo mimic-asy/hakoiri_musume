@@ -135,25 +135,25 @@ def vacant_check_down(rows, x1, y1):
 def hight_move_right(rows, x1, y1, x2, y2):
     swap(rows, y1, x1, y1, x1 + 1)
     swap(rows, y2, x2, y2, x2 + 1)
-    return print(rows)
+    return rows
 
 
 def hight_move_left(rows, x1, y1, x2, y2):
     swap(rows, y1, x1, y1, x1 - 1)
     swap(rows, y2, x2, y2, x2 - 1)
-    return print(rows)
+    return rows
 
 
 def hight_move_top(rows, x1, y1, x2, y2):
     swap(rows, y1, x1, y1 - 1, x1)
     swap(rows, y2, x2, y2 - 1, x2)
-    return print(rows)
+    return rows
 
 
 def hight_move_down(rows, x1, y1, x2, y2):
     swap(rows, y1, x1, y1 + 1, x1)
     swap(rows, y2, x2, y2 + 1, x2)
-    return print(rows)
+    return rows
 
 
 def hight_move(rows, x1, y1, x2, y2):
@@ -275,25 +275,25 @@ def musume_swap(rows, x1, y1, x2, y2, x3, y3, x4, y4):
         and vacant_check_right(rows, x2, y2)
         and vacant_check_right(rows, x4, y4)
     ):
-        musume_move_right(rows, x1, y1, x2, y2, x3, y3, x4, y4)
+        rows = musume_move_right(rows, x1, y1, x2, y2, x3, y3, x4, y4)
 
     if (
         left_check(x1)
         and vacant_check_left(rows, x1, y1)
         and vacant_check_left(rows, x3, y3)
     ):
-        musume_move_left(rows, x1, y1, x2, y2, x3, y3, x4, y4)
+        rows = musume_move_left(rows, x1, y1, x2, y2, x3, y3, x4, y4)
 
     if (
         top_check(y1)
         and vacant_check_top(rows, x1, y1)
         and vacant_check_top(rows, x2, y2)
     ):
-        musume_move_top(rows, x1, y1, x2, y2, x3, y3, x4, y4)
+        rows = musume_move_top(rows, x1, y1, x2, y2, x3, y3, x4, y4)
 
     if (
         down_check(y3)
         and vacant_check_down(rows, x3, y3)
         and vacant_check_down(rows, x4, y4)
     ):
-        musume_move_downswap(rows, x1, y1, x2, y2, x3, y3, x4, y4)
+        rows = musume_move_downswap(rows, x1, y1, x2, y2, x3, y3, x4, y4)
