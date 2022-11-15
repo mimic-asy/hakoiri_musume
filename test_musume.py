@@ -42,3 +42,25 @@ def test_vacant_check_right():
     assert musume.vacant_check_down(a,0,0) ==False
     assert musume.vacant_check_down(a,0,1) == False
     assert musume.vacant_check_down(a,1,2) == False
+
+def test_move():
+    Musume= 0
+    Sohu= 1
+    Sobo= 2
+    Chichi= 3
+    Haha = 4
+    Kyodai= 5
+    Sado= 6
+    Syodo= 7
+    Kado= 8
+    Budo= 9
+    Vacant= -1
+    
+    rows = np.array([
+        [Vacant  , Musume, Musume, Sobo], 
+        [Vacant  , Musume, Musume, Sobo],
+        [Sohu, Chichi, Sado, Haha],
+        [Sohu, Chichi, Syodo , Haha],
+        [Kado  , Kyodai,  Kyodai, Budo]
+    ])
+    assert musume.hight_move(rows,0,2,0,3) == print(rows)
