@@ -4,6 +4,8 @@ import numpy as np
 def swap(rows, y1, x1, y2, x2):
     rows[y1, x1], rows[y2, x2] = rows[y2, x2], rows[y1, x1]
 
+    return rows
+
 
 #
 
@@ -133,26 +135,26 @@ def vacant_check_down(rows, x1, y1):
 
 # 1*2のマスを動かす関数(テスト済み)
 def hight_move_right(rows, x1, y1, x2, y2):
-    swap(rows, y1, x1, y1, x1 + 1)
-    swap(rows, y2, x2, y2, x2 + 1)
+    rows = swap(rows, y1, x1, y1, x1 + 1)
+    rows = swap(rows, y2, x2, y2, x2 + 1)
     return rows
 
 
 def hight_move_left(rows, x1, y1, x2, y2):
-    swap(rows, y1, x1, y1, x1 - 1)
-    swap(rows, y2, x2, y2, x2 - 1)
+    rows = swap(rows, y1, x1, y1, x1 - 1)
+    rows = swap(rows, y2, x2, y2, x2 - 1)
     return rows
 
 
 def hight_move_top(rows, x1, y1, x2, y2):
-    swap(rows, y1, x1, y1 - 1, x1)
-    swap(rows, y2, x2, y2 - 1, x2)
+    rows = swap(rows, y1, x1, y1 - 1, x1)
+    rows = swap(rows, y2, x2, y2 - 1, x2)
     return rows
 
 
 def hight_move_down(rows, x1, y1, x2, y2):
-    swap(rows, y1, x1, y1 + 1, x1)
-    swap(rows, y2, x2, y2 + 1, x2)
+    rows = swap(rows, y1, x1, y1 + 1, x1)
+    rows = swap(rows, y2, x2, y2 + 1, x2)
     return rows
 
 
@@ -172,18 +174,10 @@ def hight_move(rows, x1, y1, x2, y2):
     ):
         hight_move_left(rows, x1, y1, x2, y2)
 
-    if (
-        top_check(y1)
-        and vacant_check_top(rows, x1, y1)
-        and vacant_check_top(rows, x2, y2)
-    ):
+    if top_check(y1) and vacant_check_top(rows, x1, y1):
         hight_move_top(rows, x1, y1, x2, y2)
 
-    if (
-        down_check(y2)
-        and vacant_check_down(rows, x1, y1)
-        and vacant_check_down(rows, x2, y2)
-    ):
+    if down_check(y2) and vacant_check_down(rows, x2, y2):
         hight_move_down(rows, x1, y1, x2, y2)
 
     else:
@@ -192,26 +186,28 @@ def hight_move(rows, x1, y1, x2, y2):
 
 # 2*1のマスを動かす関数
 def wide_move_left(rows, x1, y1, x2, y2):
-    swap(rows, y1, x1, y1, x1 - 1)
-    swap(rows, y2, x2, y2, x2 - 1)
+    rows = swap(rows, y1, x1, y1, x1 - 1)
+    rows = swap(rows, y2, x2, y2, x2 - 1)
     return rows
 
 
 def wide_move_right(rows, x1, y1, x2, y2):
-    swap(rows, y1, x1, y1, x1 + 1)
-    swap(rows, y2, x2, y2, x2 + 1)
+
+    rows = swap(rows, y2, x2, y2, x2 + 1)
+    rows = swap(rows, y1, x1, y1, x1 + 1)
+
     return rows
 
 
 def wide_move_top(rows, x1, y1, x2, y2):
-    swap(rows, y1, x1, y1 - 1, x1)
-    swap(rows, y2, x2, y2 - 1, x2)
+    rows = swap(rows, y1, x1, y1 - 1, x1)
+    rows = swap(rows, y2, x2, y2 - 1, x2)
     return rows
 
 
 def wide_move_down(rows, x1, y1, x2, y2):
-    swap(rows, y1, x1, y1 + 1, x1)
-    swap(rows, y2, x2, y2 + 1, x2)
+    rows = swap(rows, y1, x1, y1 + 1, x1)
+    rows = swap(rows, y2, x2, y2 + 1, x2)
     return rows
 
 
@@ -221,67 +217,58 @@ def wide_move(rows, x1, y1, x2, y2):
         and vacant_check_top(rows, x1, y1)
         and vacant_check_top(rows, x2, y2)
     ):
-        wide_move_top(rows, x1, y1, x2, y2)
+        return wide_move_top(rows, x1, y1, x2, y2)
 
     if (
         down_check(y1)
         and vacant_check_down(rows, x1, y1)
         and vacant_check_down(rows, x2, y2)
     ):
-        wide_move_down(rows, x1, y1, x2, y2)
+        return wide_move_down(rows, x1, y1, x2, y2)
 
-    if (
-        right_check(x1)
-        and vacant_check_right(rows, x1, y1)
-        and vacant_check_right(rows, x2, y2)
-    ):
-        wide_move_right(rows, x1, y1, x2, y2)
+    if right_check(x1) and vacant_check_right(rows, x2, y2):
 
-    if (
-        left_check(x2)
-        and vacant_check_left(rows, x1, y1)
-        and vacant_check_left(rows, x2, y2)
-    ):
-        wide_move_left(rows, x1, y1, x2, y2)
+        chaeck = wide_move_right(rows, x1, y1, x2, y2)
+
+        assert chaeck is not None
+        return chaeck
+
+    if left_check(x2) and vacant_check_left(rows, x1, y1):
+        return wide_move_left(rows, x1, y1, x2, y2)
     else:
         print("この数字は動かせません、他の数字を選んでほしいぞい")
 
 
 # 2*2のマスを動かす関数
 def musume_move_right(rows, x1, y1, x2, y2, x3, y3, x4, y4):
-    if (
-        right_check(x2)
-        and vacant_check_right(rows, x2, y2)
-        and vacant_check_right(rows, x4, y4)
-    ):
-        swap(rows, y2, x2, y2, x2 + 1)
-        swap(rows, y4, x4, y4, x4 + 1)
-        swap(rows, y1, x1, y1, x1 + 1)
-        swap(rows, y3, x3, y3, x3 + 1)
-        return rows
+    rows = swap(rows, y2, x2, y2, x2 + 1)
+    rows = swap(rows, y4, x4, y4, x4 + 1)
+    rows = swap(rows, y1, x1, y1, x1 + 1)
+    rows = swap(rows, y3, x3, y3, x3 + 1)
+    return rows
 
 
 def musume_move_left(rows, x1, y1, x2, y2, x3, y3, x4, y4):
-    swap(rows, y1, x1, y1, x1 - 1)
-    swap(rows, y3, x3, y3, x3 - 1)
-    swap(rows, y2, x2, y2, x2 - 1)
-    swap(rows, y4, x4, y4, x4 - 1)
+    rows = swap(rows, y1, x1, y1, x1 - 1)
+    rows = swap(rows, y3, x3, y3, x3 - 1)
+    rows = swap(rows, y2, x2, y2, x2 - 1)
+    rows = swap(rows, y4, x4, y4, x4 - 1)
     return rows
 
 
 def musume_move_top(rows, x1, y1, x2, y2, x3, y3, x4, y4):
-    swap(rows, y1, x1, y1 + 1, x1)
-    swap(rows, y2, x2, y2 + 1, x2)
-    swap(rows, y3, x3, y3 + 1, x3)
-    swap(rows, y4, x4, y4 + 1, x4)
+    rows = swap(rows, y1, x1, y1 + 1, x1)
+    rows = swap(rows, y2, x2, y2 + 1, x2)
+    rows = swap(rows, y3, x3, y3 + 1, x3)
+    rows = swap(rows, y4, x4, y4 + 1, x4)
     return rows
 
 
 def musume_move_downswap(rows, x1, y1, x2, y2, x3, y3, x4, y4):
-    swap(rows, y3, x3, y3 - 1, x3)
-    swap(rows, y2, x2, y2 - 1, x2)
-    swap(rows, y1, x1, y1 - 1, x1)
-    swap(rows, y4, x4, y4 - 1, x4)
+    rows = swap(rows, y3, x3, y3 - 1, x3)
+    rows = swap(rows, y2, x2, y2 - 1, x2)
+    rows = swap(rows, y1, x1, y1 - 1, x1)
+    rows = swap(rows, y4, x4, y4 - 1, x4)
     return rows
 
 
