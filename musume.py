@@ -191,42 +191,58 @@ def hight_move(rows, x1, y1, x2, y2):
 
 
 # 2*1のマスを動かす関数
+def wide_move_left(rows, x1, y1, x2, y2):
+    swap(rows, y1, x1, y1, x1 - 1)
+    swap(rows, y2, x2, y2, x2 - 1)
+    return rows
+
+
+def wide_move_right(rows, x1, y1, x2, y2):
+    swap(rows, y1, x1, y1, x1 + 1)
+    swap(rows, y2, x2, y2, x2 + 1)
+    return rows
+
+
+def wide_move_top(rows, x1, y1, x2, y2):
+    swap(rows, y1, x1, y1 - 1, x1)
+    swap(rows, y2, x2, y2 - 1, x2)
+    return rows
+
+
+def wide_move_down(rows, x1, y1, x2, y2):
+    swap(rows, y1, x1, y1 + 1, x1)
+    swap(rows, y2, x2, y2 + 1, x2)
+    return rows
+
+
 def wide_move(rows, x1, y1, x2, y2):
     if (
         top_check(y1)
         and vacant_check_top(rows, x1, y1)
         and vacant_check_top(rows, x2, y2)
     ):
-        swap(rows, y1, x1, y1 - 1, x1)
-        swap(rows, y2, x2, y2 - 1, x2)
-        print(rows)
+        wide_move_top(rows, x1, y1, x2, y2)
 
     if (
         down_check(y1)
         and vacant_check_down(rows, x1, y1)
         and vacant_check_down(rows, x2, y2)
     ):
-        swap(rows, y1, x1, y1 + 1, x1)
-        swap(rows, y2, x2, y2 + 1, x2)
-        print(rows)
+        wide_move_down(rows, x1, y1, x2, y2)
 
     if (
         right_check(x1)
         and vacant_check_right(rows, x1, y1)
         and vacant_check_right(rows, x2, y2)
     ):
-        swap(rows, y1, x1, y1, x1 + 1)
-        swap(rows, y2, x2, y2, x2 + 1)
-        print(rows)
+        wide_move_right(rows, x1, y1, x2, y2)
 
     if (
         left_check(x2)
         and vacant_check_left(rows, x1, y1)
         and vacant_check_left(rows, x2, y2)
     ):
-        swap(rows, y1, x1, y1, x1 - 1)
-        swap(rows, y2, x2, y2, x2 - 1)
-        print(rows)
+        wide_move_left(rows, x1, y1, x2, y2)
     else:
         print("この数字は動かせません、他の数字を選んでほしいぞい")
 
