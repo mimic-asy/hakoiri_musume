@@ -5,10 +5,8 @@ rows = musume.init_puzzle()
 
 
 def musume_puzzle(rows):
-
-    musume.swap_check(rows)
     select_number = musume.swap_check(rows)
-    num = musume.area_check(select_number)
+    num = musume.area_check(rows, select_number)
     musumecoordinate = musume.split_number(num)
 
     if select_number == 0:
@@ -24,7 +22,12 @@ def musume_puzzle(rows):
         musume.musume_swap(rows, x1, y1, x2, y2, x3, y3, x4, y4)
         print(rows)
 
-    if 0 < select_number < 5:
+    if (
+        select_number == 1
+        or select_number == 2
+        or select_number == 3
+        or select_number == 4
+    ):
         y1 = musumecoordinate[0]
         x1 = musumecoordinate[1]
         y2 = musumecoordinate[2]
@@ -40,13 +43,19 @@ def musume_puzzle(rows):
         musume.wide_move(rows, x1, y1, x2, y2)
         print(rows)
 
-    if 5 < select_number < 10:
+    if (
+        select_number == 6
+        or select_number == 6
+        or select_number == 7
+        or select_number == 8
+        or select_number == 9
+    ):
         y1 = musumecoordinate[0]
         x1 = musumecoordinate[1]
         musume.nomal_swap(rows, x1, y1)
         print(rows)
 
-    else:
+    if select_number == None:
         print("エラー")
 
 
