@@ -7,7 +7,7 @@ def swap(rows, y1, x1, y2, x2):
     return rows
 
 
-#
+# rowsを定義する関数
 
 
 def init_puzzle():
@@ -36,6 +36,7 @@ def init_puzzle():
     return rows
 
 
+# 数字を選ぶ関数
 def swap_check2(val):
 
     if val.isdigit():
@@ -67,9 +68,21 @@ def area_check(rows, a):
     return [(y, x) for y, x in zip(yaxis, xaxis)]
 
 
-if __name__ == "__main__":
-    rows = init_puzzle()
-    print(area_check(rows, 0))
+# 取得した座標をintに置き換える
+def split_number(num):
+
+    first = 0
+    coordinate = []
+    x = len(num)
+
+    for i in range(x):
+        xy_soordnate = num[first]
+        a, b = xy_soordnate
+        first += 1
+        coordinate.append(a)
+        coordinate.append(b)
+    return coordinate
+
 
 # 範囲内か調べる関数（テスト済み）
 def right_check(x):
@@ -300,3 +313,10 @@ def musume_swap(rows, x1, y1, x2, y2, x3, y3, x4, y4):
         and vacant_check_down(rows, x4, y4)
     ):
         rows = musume_move_downswap(rows, x1, y1, x2, y2, x3, y3, x4, y4)
+
+
+def clear():
+    if rows[4, 1] == 0 and rows[4, 2] == 0:
+        return True
+    else:
+        return False
