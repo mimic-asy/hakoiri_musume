@@ -384,10 +384,10 @@ def musume_move_top(rows, x1, y1, x2, y2, x3, y3, x4, y4):
 
 
 def musume_move_downswap(rows, x1, y1, x2, y2, x3, y3, x4, y4):
-    rows = swap(rows, y3, x3, y3 - 1, x3)
-    rows = swap(rows, y2, x2, y2 - 1, x2)
-    rows = swap(rows, y1, x1, y1 - 1, x1)
-    rows = swap(rows, y4, x4, y4 - 1, x4)
+    rows = swap(rows, y4, x4, y4 + 1, x4)
+    rows = swap(rows, y2, x2, y2 + 1, x2)
+    rows = swap(rows, y3, x3, y3 + 1, x3)
+    rows = swap(rows, y1, x1, y1 + 1, x1)
     return rows
 
 
