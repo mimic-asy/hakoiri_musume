@@ -161,23 +161,97 @@ def nomal_down(rows, x1, y1):
 
 def nomal_swap(rows, x1, y1):
 
-    if vacant_check_left(rows, x1, y1) and left_check(x1):
-        rows = swap(rows, y1, x1, y1, x1 - 1)
-        return rows
+    if (
+        left_check(x1)
+        and vacant_check_left(rows, x1, y1)
+        and top_check(y1)
+        and vacant_check_top(rows, x1, y1)
+    ):
+        a = input("left or top")
+        while a == "left" or a == "top":
+            if a == "left":
+                return nomal_left(rows, x1, y1)
+            if a == "top":
+                return nomal_top(rows, x1, y1)
+            else:
+                print("もう一度選んでね")
+                continue
 
-    if vacant_check_right(rows, x1, y1) and right_check(x1):
-        rows = swap(rows, y1, x1, y1, x1 + 1)
-        return rows
+    if (
+        left_check(x1)
+        and vacant_check_left(rows, x1, y1)
+        and down_check(y1)
+        and vacant_check_down(rows, x1, y1)
+    ):
+        a = input("left or down")
+        while a == "left" or a == "down":
+            if a == "left":
+                return nomal_left(rows, x1, y1)
+            if a == "down":
+                return nomal_down(rows, x1, y1)
+            else:
+                print("もう一度選んでね")
+                continue
 
-    if vacant_check_top(rows, x1, y1) and top_check(y1):
-        rows = swap(rows, y1, x1, y1 - 1, x1)
-        return rows
-    if vacant_check_down(rows, x1, y1) and down_check(y1):
-        rows = swap(rows, y1, x1, y1 + 1, x1)
-        return rows
+    if (
+        left_check(x1)
+        and vacant_check_left(rows, x1, y1)
+        and right_check(x1)
+        and vacant_check_right(rows, x1, y1)
+    ):
+        a = input("left or right")
+        while a == "left" or a == "right":
+            if a == "left":
+                return nomal_left(rows, x1, y1)
+            if a == "right":
+                return nomal_right(rows, x1, y1)
+            else:
+                print("もう一度選んでね")
+                continue
+
+    if (
+        right_check(x1)
+        and vacant_check_right(rows, x1, y1)
+        and vacant_check_top(rows, x1, y1)
+        and top_check(y1)
+    ):
+        a = input("right or top")
+        while a == "right" or a == "top":
+            if a == "right":
+                return nomal_right(rows, x1, y1)
+            if a == "top":
+                return nomal_top(rows, x1, y1)
+            else:
+                print("もう一度選んでね")
+                continue
+
+    if (
+        right_check(x1)
+        and vacant_check_right(rows, x1, y1)
+        and down_check(y1)
+        and vacant_check_down(rows, x1, y1)
+    ):
+        a = input("right or down")
+        while a == "right" or a == "down":
+            if a == "right":
+                return nomal_right(rows, x1, y1)
+            if a == "down":
+                return nomal_down(rows, x1, y1)
+            else:
+                print("もう一度選んでね")
+                continue
+    if left_check(x1) and vacant_check_left(rows, x1, y1):
+        return nomal_left(rows, x1, y1)
+
+    if right_check(x1) and vacant_check_right(rows, x1, y1):
+        return nomal_right(rows, x1, y1)
+
+    if top_check(y1) and vacant_check_top(rows, x1, y1):
+        return nomal_top(rows, x1, y1)
+    if down_check(y1) and vacant_check_down(rows, x1, y1):
+        return nomal_down(rows, x1, y1)
     else:
         print("この数字は動かせません")
-        return None
 
 
 # 1*2のマスを動かす関数(テスト済み)
