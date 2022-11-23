@@ -37,35 +37,24 @@ def init_puzzle():
 
 
 # 数字を選ぶ関数
-def swap_check2(val):
-
-    if val.isdigit():
-        a = int(val)
-        if -1 < a < 10:
-            return a
-        else:
-            print("０から９までの数字を入力してね")
-            return None
-    else:
-        print("０から９までの数字を入力してね")
-        return None
-
-    assert False
-
-
-# print(init_puzzle())
 # 入力された数字が使用可能か判断する関数
 def swap_check(rows):
     print(rows)
-    val = input("動かしたい数字を入力してね")
-    swap_check2(val)
+    number = input("動かしたい数字を入力してね")
+    val = int(number)
+    if -1 < val < 10:
+        return val
+    else:
+        print("０から９までの数字を入力してね")
+        return None
+    assert False
 
 
 # 選択した数字はどこにあるかどうかを調べる。
 
 
-def area_check(rows, a):
-    yaxis, xaxis = np.where(rows == a)
+def area_check(rows, val):
+    yaxis, xaxis = np.where(rows == val)
     return [(y, x) for y, x in zip(yaxis, xaxis)]
 
 
@@ -137,7 +126,7 @@ def vacant_check_top(rows, x1, y1):
     if rows[y1 - 1, x1] == -1:
         return True
     else:
-        print(rows[y1 - 1, x1])
+        return False
 
 
 def vacant_check_down(rows, x1, y1):
@@ -148,22 +137,18 @@ def vacant_check_down(rows, x1, y1):
 
 
 def nomal_swap(rows, x1, y1):
-    nomalnum = area_check(0)
-    nomalcoordinate = split_number(nomalnum)
-    y2 = nomalnum[0]
-    x2 = nomalnum[1]
 
     if vacant_check_right(rows, x1, y1) and right_check(x1):
-        rows = swap(rows, y1, x1, y2, x2)
+        rows = swap(rows, y1, x1, y1, x1 + 1)
         return rows
     if vacant_check_left(rows, x1, y1) and left_check(x1):
-        rows = swap(rows, y1, x1, y2, x2)
+        rows = swap(rows, y1, x1, y1, x1 - 1)
         return rows
     if vacant_check_top(rows, x1, y1) and top_check(y1):
-        rows = swap(rows, y1, x1, y2, x2)
+        rows = swap(rows, y1, x1, y1 - 1, x1)
         return rows
     if vacant_check_down(rows, x1, y1) and down_check(y1):
-        rows = swap(rows, y1, x1, y2, x2)
+        rows = swap(rows, y1, x1, y1 + 1, x1)
         return rows
     else:
         print("この数字は動かせません")
