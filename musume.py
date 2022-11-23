@@ -80,7 +80,7 @@ def split_number(num):
 # 範囲内か調べる関数（テスト済み）
 def right_check(x):
     # 右側が範囲内であることを示す
-    if x + 1 < 4:
+    if x + 1 <= 3:
         return True
     else:
         return False
@@ -240,6 +240,7 @@ def nomal_swap(rows, x1, y1):
             else:
                 print("もう一度選んでね")
                 continue
+
     if left_check(x1) and vacant_check_left(rows, x1, y1):
         return nomal_left(rows, x1, y1)
 
@@ -274,8 +275,8 @@ def hight_move_top(rows, x1, y1, x2, y2):
 
 
 def hight_move_down(rows, x1, y1, x2, y2):
-    rows = swap(rows, y1, x1, y1 + 1, x1)
     rows = swap(rows, y2, x2, y2 + 1, x2)
+    rows = swap(rows, y1, x1, y1 + 1, x1)
     return rows
 
 
@@ -348,11 +349,11 @@ def wide_move(rows, x1, y1, x2, y2):
     ):
         return wide_move_down(rows, x1, y1, x2, y2)
 
-    if right_check(x1) and vacant_check_right(rows, x2, y2):
+    if right_check(x2) and vacant_check_right(rows, x2, y2):
 
         return wide_move_right(rows, x1, y1, x2, y2)
 
-    if left_check(x2) and vacant_check_left(rows, x1, y1):
+    if left_check(x1) and vacant_check_left(rows, x1, y1):
         return wide_move_left(rows, x1, y1, x2, y2)
     else:
         print("この数字は動かせません、他の数字を選んでほしいぞい")
@@ -376,10 +377,10 @@ def musume_move_left(rows, x1, y1, x2, y2, x3, y3, x4, y4):
 
 
 def musume_move_top(rows, x1, y1, x2, y2, x3, y3, x4, y4):
-    rows = swap(rows, y1, x1, y1 + 1, x1)
-    rows = swap(rows, y2, x2, y2 + 1, x2)
-    rows = swap(rows, y3, x3, y3 + 1, x3)
-    rows = swap(rows, y4, x4, y4 + 1, x4)
+    rows = swap(rows, y1, x1, y1 - 1, x1)
+    rows = swap(rows, y2, x2, y2 - 1, x2)
+    rows = swap(rows, y3, x3, y3 - 1, x3)
+    rows = swap(rows, y4, x4, y4 - 1, x4)
     return rows
 
 
