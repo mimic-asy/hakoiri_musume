@@ -55,7 +55,8 @@ def swap_check2(val):
 
 # print(init_puzzle())
 # 入力された数字が使用可能か判断する関数
-def swap_check():
+def swap_check(rows):
+    print(rows)
     val = input("動かしたい数字を入力してね")
     swap_check2(val)
 
@@ -146,6 +147,29 @@ def vacant_check_down(rows, x1, y1):
         return False
 
 
+def nomal_swap(rows, x1, y1):
+    nomalnum = area_check(0)
+    nomalcoordinate = split_number(nomalnum)
+    y2 = nomalnum[0]
+    x2 = nomalnum[1]
+
+    if vacant_check_right(rows, x1, y1) and right_check(x1):
+        rows = swap(rows, y1, x1, y2, x2)
+        return rows
+    if vacant_check_left(rows, x1, y1) and left_check(x1):
+        rows = swap(rows, y1, x1, y2, x2)
+        return rows
+    if vacant_check_top(rows, x1, y1) and top_check(y1):
+        rows = swap(rows, y1, x1, y2, x2)
+        return rows
+    if vacant_check_down(rows, x1, y1) and down_check(y1):
+        rows = swap(rows, y1, x1, y2, x2)
+        return rows
+    else:
+        print("この数字は動かせません")
+        return None
+
+
 # 1*2のマスを動かす関数(テスト済み)
 def hight_move_right(rows, x1, y1, x2, y2):
     rows = swap(rows, y1, x1, y1, x1 + 1)
@@ -178,23 +202,24 @@ def hight_move(rows, x1, y1, x2, y2):
         and vacant_check_right(rows, x1, y1)
         and vacant_check_right(rows, x2, y2)
     ):
-        hight_move_right(rows, x1, y1, x2, y2)
+        return hight_move_right(rows, x1, y1, x2, y2)
 
     if (
         left_check(x1)
         and vacant_check_left(rows, x1, y1)
         and vacant_check_left(rows, x2, y2)
     ):
-        hight_move_left(rows, x1, y1, x2, y2)
+        return hight_move_left(rows, x1, y1, x2, y2)
 
     if top_check(y1) and vacant_check_top(rows, x1, y1):
-        hight_move_top(rows, x1, y1, x2, y2)
+        return hight_move_top(rows, x1, y1, x2, y2)
 
     if down_check(y2) and vacant_check_down(rows, x2, y2):
-        hight_move_down(rows, x1, y1, x2, y2)
+        return hight_move_down(rows, x1, y1, x2, y2)
 
     else:
         print("この数字は動かせません、動かせる数字を選んでください")
+        return None
 
 
 # 2*1のマスを動かす関数
@@ -315,8 +340,9 @@ def musume_swap(rows, x1, y1, x2, y2, x3, y3, x4, y4):
         rows = musume_move_downswap(rows, x1, y1, x2, y2, x3, y3, x4, y4)
 
 
-def clear():
+def clear(rows):
     if rows[4, 1] == 0 and rows[4, 2] == 0:
+        print("puzzle clear!")
         return True
     else:
         return False
