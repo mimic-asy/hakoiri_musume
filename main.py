@@ -1,5 +1,4 @@
 import musume
-import numpy as np
 
 rows = musume.init_puzzle()
 
@@ -46,7 +45,7 @@ def musume_puzzle(rows):
             musume.nomal_swap(rows, x1, y1)
             print(rows)
 
-        if val == None:
+        if val is None:
             print("もう一回数字を選んでね、−１と隣接する数字が選べるよ")
             continue
 
