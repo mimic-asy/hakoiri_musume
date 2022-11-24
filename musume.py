@@ -364,6 +364,19 @@ def wide_move_down(rows, x1, y1, x2, y2):
 
 def wide_move(rows, x1, y1, x2, y2):
     if (
+        right_check(x2)
+        and vacant_check_right(rows, x2, y2)
+        and left_check(x1)
+        and vacant_check_left(rows, x1, y1)
+    ):
+        a = input("right or left ?")
+        while a == "right" or a == "left":
+            if a == "right":
+                return wide_move_right(rows, x1, y1, x2, y2)
+            if a == "left":
+                return wide_move_left(rows, x1, y1, x2, y2)
+
+    if (
         top_check(y1)
         and vacant_check_top(rows, x1, y1)
         and vacant_check_top(rows, x2, y2)
