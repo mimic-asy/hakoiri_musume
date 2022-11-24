@@ -241,6 +241,22 @@ def nomal_swap(rows, x1, y1):
                 print("もう一度選んでね")
                 continue
 
+    if (
+        top_check(y1)
+        and vacant_check_top(rows, x1, y1)
+        and down_check(y1)
+        and vacant_check_down(rows, x1, y1)
+    ):
+        a = input("down or top?")
+        while a == "top" or a == "down":
+            if a == "top":
+                return nomal_top(rows, x1, y1)
+            if a == "down":
+                return nomal_down(rows, x1, y1)
+            else:
+                print("もう一度選んでね")
+                continue
+
     if left_check(x1) and vacant_check_left(rows, x1, y1):
         return nomal_left(rows, x1, y1)
 
