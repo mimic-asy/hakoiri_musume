@@ -281,6 +281,18 @@ def hight_move_down(rows, x1, y1, x2, y2):
 
 
 def hight_move(rows, x1, y1, x2, y2):
+    if (
+        top_check(y1)
+        and down_check(y2)
+        and vacant_check_top(rows, x1, y1)
+        and vacant_check_down(rows, x2, y2)
+    ):
+        responce = input("top or down? = ")
+        while responce == "top" or responce == "down":
+            if responce == "top":
+                return hight_move_top(rows, x1, y1, x2, y2)
+            if responce == "down":
+                return hight_move_down(rows, x1, y1, x2, y2)
 
     if (
         right_check(x1)
