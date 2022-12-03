@@ -1,5 +1,6 @@
 import musume
 import numpy as np
+import breadth_search as breadth
 
 rows = musume.init_puzzle()
 
@@ -55,4 +56,4 @@ def musume_puzzle(rows):
             break
 
 
-musume_puzzle(rows)
+print(breadth.boad_simle(rows))
