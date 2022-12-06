@@ -1,6 +1,5 @@
 import musume
 import numpy as np
-
 # np.set_printoptions(threshold=sys.maxsize)
 
 
