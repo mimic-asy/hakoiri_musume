@@ -53,6 +53,17 @@ def swap_check(rows):
     assert False
 
 
+def swap_check2(number):
+    val = int(number)
+    if -1 < val < 10:
+        return val
+
+    if val == 99:
+        return val
+    else:
+        print("０から９までの数字を入力してね")
+        return None
+    assert False
 # 選択した数字はどこにあるかどうかを調べる。
 
 
@@ -469,3 +480,56 @@ def clear(rows):
         return True
     else:
         return False
+
+
+def basic_top(rows, x1, y1):
+    if (top_check(y1)
+            and vacant_check_top(rows, x1, y1)):
+        return True
+
+
+def basic_down(rows, x1, y1):
+    if (down_check(y1)
+            and vacant_check_down(rows, x1, y1)):
+        return True
+
+
+def basic_left(rows, x1, y1):
+    if (left_check(x1)
+            and vacant_check_left(rows, x1, y1)):
+        return True
+
+
+def basic_right(rows, x1, y1):
+    if (right_check(x1)
+            and vacant_check_right(rows, x1, y1)):
+        return True
+
+
+def doble_basic_top(rows, x1, y1, x2, y2):
+    if (top_check(y1)
+        and vacant_check_top(rows, x1, y1)
+            and vacant_check_top(rows, x2, y2)):
+        return True
+
+
+def doble_basic_down(rows, x1, y1, x2, y2):
+    if (down_check(y2)
+        and vacant_check_down(rows, x1, y1)
+            and vacant_check_down(rows, x2, y2)):
+        return True
+
+
+def doble_basic_left(rows, x1, y1, x2, y2):
+    if (left_check(x1)
+        and vacant_check_left(rows, x1, y1)
+            and vacant_check_left(rows, x2, y2)):
+        return True
+
+
+def doble_basic_right(rows, x1, y1, x2, y2):
+
+    if (right_check(x2)
+        and vacant_check_right(rows, x1, y1)
+            and vacant_check_right(rows, x2, y2)):
+        return True

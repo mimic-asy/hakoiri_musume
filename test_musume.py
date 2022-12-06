@@ -1,8 +1,7 @@
 import musume
 import numpy as np
-import sys
 
-np.set_printoptions(threshold=sys.maxsize)
+# np.set_printoptions(threshold=sys.maxsize)
 
 
 def test_swap_check2():
@@ -116,3 +115,6 @@ def test_move():
         ]),
         right,
     )
+
+
+rows = musume.init_puzzle()
