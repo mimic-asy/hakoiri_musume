@@ -1,5 +1,6 @@
 import musume
 import numpy as np
+import breadth_search as bs
 # np.set_printoptions(threshold=sys.maxsize)
 
 
@@ -116,4 +117,41 @@ def test_move():
     )
 
 
+def nomal_left(rows, x1, y1):
+    rows = musume.swap(rows, y1, x1, y1, x1 - 1)
+    return rows
+
+
+def basic_left(rows, x1, y1):
+    if (musume.left_check(x1)
+            and musume.vacant_check_left(rows, x1, y1)):
+        return True
+
+
 rows = musume.init_puzzle()
+
+# print(bs.left_move(rows,8))
+# print(bs.check_leftside(rows,8))
+# print(musume.vacant_check_left(rows, 0, 4))
+# print(musume.basic_left(rows, 0, 4))
+# print(bs.movable_list(rows))
+
+# print(bs.breadth_search(rows
+""""
+def b(rows):
+    board_state = []
+    board_queue = deque()
+    board_queue.append(rows)
+    while len(board_queue) > 0:
+        rows_data  = board_queue.popleft()
+        movable = bs.movable_list(rows_data)
+        for i in movable:
+            new_rows = np.copy(i)
+            for n in range(10):
+                #area = musume.area_check(new_rows,n)
+                comparison = bs.board_simple(new_rows)
+                mache_list = bs.what_mache(comparison,)
+"""
+
+
+print(bs.breadth_search(rows))
