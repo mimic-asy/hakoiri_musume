@@ -68,13 +68,7 @@ def swap_check2(number):
 
 
 def area_check(rows, val):
-    print("newrows =")
-    print(rows)
-    print("rows.shape =", rows.shape)
-    print("val  =")
-    print(val)
-    print("where =")
-    print(np.where(rows == val))
+
     yaxis, xaxis = np.where(rows == val)
     return [(y, x) for y, x in zip(yaxis, xaxis)]
 
