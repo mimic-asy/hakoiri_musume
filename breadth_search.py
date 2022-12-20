@@ -418,24 +418,45 @@ def movable_list(rows):
 
 def what_mache(simple_bord, board_state):
     for n in board_state:
+        if simple_bord is not n:
+            continue
         if simple_bord == n:
             return False
 
 
 def breadth_search(rows):
+    n = 1
+    # rows is copy
     rows_copy = np.copy(rows)
+    # rowsを比較しやすい形にする
     rows_simple = board_simple(rows_copy)
+    # board_state に　比較しやすい形のrowsを入れる
     board_state = []
+    # board_queue に　変換する前の盤面を入れる
     board_queue = deque()
-    board_queue.append(rows_simple)
-    board_state.append()
+    # 最初の盤面の変換する前を入れる
+    board_queue.append(rows_copy)
+    # 最初の盤面の変換した後を入れる
+    board_state.append(rows_simple)
+    # board_queue が０になるまで実行する
     while len(board_queue) > 0:
-        rows = board_queue.popleft()
-        moved_rows_list = movable_list(rows)
+        # rows_nowにboard_queueから取り出したrowsを入れる
+        rows_now = board_queue.popleft()
+        # moved_rows_listに現在地点から展開できるノードを収納する
+        moved_rows_list = movable_list(rows_now)
+        # 現在地点から展開できるノード一つ一つが今までに出てきているか確認する
         for moved_rows in moved_rows_list:
+            # ノードを比較しやすい形に変換する
             simple_bord = board_simple(moved_rows)
+            # 比較しやすい形にしたノードをboard_state(比較しやすくなったノードを入れてあるところ)
+            # のものと比較する
             any_mache = what_mache(simple_bord, board_state)
-        if any_mache is True:
-            board_state.append(simple_bord)
-            board_queue.append(moved_rows)
+            # 比較して、board_state内にsimple_boardがなければ リストとキューに追加
+            if any_mache is not False:
+                n += 1
+                print(simple_bord, n)
+                board_state.append(simple_bord)
+                board_queue.append(moved_rows)
+            else:
+                continue
     return board_state
