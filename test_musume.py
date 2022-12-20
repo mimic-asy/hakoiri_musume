@@ -153,5 +153,4 @@ def b(rows):
                 mache_list = bs.what_mache(comparison,)
 """
 
-
-print(bs.breadth_search(rows))
+bs.breadth_search(rows)

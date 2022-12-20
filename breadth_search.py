@@ -418,9 +418,9 @@ def movable_list(rows):
 
 def what_mache(simple_bord, board_state):
     for n in board_state:
-        if simple_bord is not n:
+        if np.array_equal(simple_bord, n) is False:
             continue
-        if simple_bord == n:
+        if np.array_equal(simple_bord, n) is True:
             return False
 
 
@@ -440,6 +440,7 @@ def breadth_search(rows):
     board_state.append(rows_simple)
     # board_queue が０になるまで実行する
     while len(board_queue) > 0:
+        # for i in range(3):
         # rows_nowにboard_queueから取り出したrowsを入れる
         rows_now = board_queue.popleft()
         # moved_rows_listに現在地点から展開できるノードを収納する
@@ -453,10 +454,10 @@ def breadth_search(rows):
             any_mache = what_mache(simple_bord, board_state)
             # 比較して、board_state内にsimple_boardがなければ リストとキューに追加
             if any_mache is not False:
-                n += 1
                 print(simple_bord, n)
                 board_state.append(simple_bord)
                 board_queue.append(moved_rows)
+                n += 1
             else:
                 continue
     return board_state
