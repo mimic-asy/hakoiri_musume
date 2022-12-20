@@ -416,36 +416,26 @@ def movable_list(rows):
     return movable
 
 
-def what_mache(comparison, board_state):
-    mache_list = np.array([])
-    for i in board_state:
-        if np.all(comparison != i):
-            np.append(mache_list, 0)
-        if np.all(comparison == i):
-            np.append(mache_list, 1)
-    return mache_list
-
-
-def any_matches(mache_list):
-    return np.all(mache_list < 1)
+def what_mache(simple_bord, board_state):
+    for n in board_state:
+        if simple_bord == n:
+            return False
 
 
 def breadth_search(rows):
     rows_copy = np.copy(rows)
-    rows_origin = board_simple(rows_copy)
+    rows_simple = board_simple(rows_copy)
     board_state = []
     board_queue = deque()
-    board_queue.append(rows)
-    board_state.append(rows_origin)
-
+    board_queue.append(rows_simple)
+    board_state.append()
     while len(board_queue) > 0:
         rows = board_queue.popleft()
-        movable = movable_list(rows)
-        for rows_data in movable:
-            comparison = board_simple(rows_data)
-            mache_list = what_mache(comparison, board_state)
-            if any_matches(mache_list):
-                board_state.append(comparison)
-                board_queue.append(rows_data)
-
+        moved_rows_list = movable_list(rows)
+        for moved_rows in moved_rows_list:
+            simple_bord = board_simple(moved_rows)
+            any_mache = what_mache(simple_bord, board_state)
+        if any_mache is True:
+            board_state.append(simple_bord)
+            board_queue.append(moved_rows)
     return board_state
