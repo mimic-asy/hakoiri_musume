@@ -1,8 +1,10 @@
+"""""
 import musume
 import numpy as np
 import breadth_search as bs
 # np.set_printoptions(threshold=sys.maxsize)
 
+rows = musume.init_puzzle()
 
 def test_swap_check2():
     assert musume.swap_check2("a") is None
@@ -128,7 +130,7 @@ def basic_left(rows, x1, y1):
         return True
 
 
-rows = musume.init_puzzle()
+
 
 # print(bs.left_move(rows,8))
 # print(bs.check_leftside(rows,8))
@@ -137,7 +139,8 @@ rows = musume.init_puzzle()
 # print(bs.movable_list(rows))
 
 # print(bs.breadth_search(rows
-""""
+
+
 def b(rows):
     board_state = []
     board_queue = deque()
@@ -151,6 +154,97 @@ def b(rows):
                 #area = musume.area_check(new_rows,n)
                 comparison = bs.board_simple(new_rows)
                 mache_list = bs.what_mache(comparison,)
-"""
-
 bs.breadth_search(rows)
+
+rows1 = np.array(
+    [[ 1,  0,  0,  2],
+       [ 1,  0,  0,  2],
+       [-1, -1,  6,  8],
+       [ 3,  4,  5,  5],
+       [ 3,  4,  7,  9]]
+
+)
+rows2 = np.array(
+    [[ 1,  0,  0,  2],
+       [ 1,  0,  0,  2],
+       [-1, -1,  6,  8],
+       [ 3,  4,  5,  5],
+       [ 3,  4,  7,  9]]
+)
+
+rows3 = np.array(
+    [[-1,  0,  0,  2],
+       [ 1,  0,  0,  2],
+       [ 1, -1,  6,  8],
+       [ 3,  4,  5,  5],
+       [ 3,  4,  7,  9]]
+)
+def move_down(rows):
+    print("move_downs rows =")
+    print(rows)
+    rows_list = []
+    down_list = bs.down_movable_list(rows)
+    print("down_list")
+    print(down_list)
+    for i in down_list:
+        n = bs.down_move(rows, i)
+        print("downmove =")
+        print(n)
+        rows_list.append(n)
+    return rows_list
+
+def up_movable_list(rows):
+    up_list = []
+    for inputnumber in range(10):
+        up_movable = check_upside(rows, inputnumber)
+        print(up_movable)
+        if up_movable is not None:
+            up_list.append(up_movable)
+    return up_list
+
+
+def move_up(rows):
+    rows_list = []
+    up_list = up_movable_list(rows)
+    print(up_list)
+    for i in up_list:
+        n = bs.up_move(rows, i)
+        rows_list.append(n)
+    return rows_list
+
+#one = move_up(rows1)
+#print(rows1)
+#print(one)
+
+def check_upside(rows, inputnumber):
+    num = musume.area_check(rows, inputnumber)
+    print(num)
+    coordinate = musume.split_number(num)
+    y1 = coordinate[0]
+    x1 = coordinate[1]
+    print(y1,x1)
+
+    if (inputnumber == 0
+        or inputnumber == 5):
+        y2 = coordinate[2]
+        x2 = coordinate[3]
+        print(x1,y1,x2,y2)
+        if musume.doble_basic_top(rows, x1, y1, x2, y2):
+            return inputnumber
+        else:
+            return None
+    if 5 < inputnumber < 10:
+        print(x1,y1)
+        if musume.basic_top(rows, x1, y1):
+            return inputnumber
+        else:
+            return None
+    if 0 < inputnumber < 5:
+        print(x1,y1)
+        if musume.basic_top(rows, x1, y1):
+            return inputnumber
+        else:
+            return None
+
+    print(check_upside(rows1,i))
+"""
