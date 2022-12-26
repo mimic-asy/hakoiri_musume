@@ -2,6 +2,7 @@ import numpy as np
 
 
 def swap(rows, y1, x1, y2, x2):
+
     rows[y1, x1], rows[y2, x2] = rows[y2, x2], rows[y1, x1]
 
     return rows
@@ -36,39 +37,8 @@ def init_puzzle():
     return rows
 
 
-# 数字を選ぶ関数
-# 入力された数字が使用可能か判断する関数
-def swap_check(rows):
-    print(rows)
-    number = input("動かしたい数字を入力してね")
-    val = int(number)
-    if -1 < val < 10:
-        return val
-
-    if val == 99:
-        return val
-    else:
-        print("０から９までの数字を入力してね")
-        return None
-    assert False
-
-
-def swap_check2(number):
-    val = int(number)
-    if -1 < val < 10:
-        return val
-
-    if val == 99:
-        return val
-    else:
-        print("０から９までの数字を入力してね")
-        return None
-    assert False
-# 選択した数字はどこにあるかどうかを調べる。
-
-
 def area_check(rows, val):
-
+    assert -1 <= val <= 9
     yaxis, xaxis = np.where(rows == val)
     return [(y, x) for y, x in zip(yaxis, xaxis)]
 
@@ -89,27 +59,20 @@ def split_number(num):
     return coordinate
 
 
-# 範囲内か調べる関数（テスト済み）
 def right_check(x):
-    # 右側が範囲内であることを示す
     return x + 1 <= 3
 
 
 def left_check(x):
-    # 左側が範囲内であることを示す
     return x - 1 > -1
 
 
 def top_check(y):
-    # 上が範囲内であることを示す
     return y - 1 > -1
 
 
 def down_check(y):
-    # 下側が範囲内であることを示す
     return y + 1 < 5
-
-# 隣が−１か調べる関数(テスト済み)
 
 
 def vacant_check_right(rows, x1, y1):
