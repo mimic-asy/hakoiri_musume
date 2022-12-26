@@ -475,14 +475,6 @@ def musume_swap(rows, x1, y1, x2, y2, x3, y3, x4, y4):
         rows = musume_move_downswap(rows, x1, y1, x2, y2, x3, y3, x4, y4)
 
 
-def clear(rows):
-    if rows[4, 1] == -1 or rows[4, 2] == -1:
-        print("puzzle clear!")
-        return True
-    else:
-        return False
-
-
 def basic_top(rows, x1, y1):
     if (top_check(y1)
             and vacant_check_top(rows, x1, y1)):
