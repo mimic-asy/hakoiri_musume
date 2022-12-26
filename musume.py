@@ -92,83 +92,56 @@ def split_number(num):
 # 範囲内か調べる関数（テスト済み）
 def right_check(x):
     # 右側が範囲内であることを示す
-    if x + 1 <= 3:
-        return True
-    else:
-        return False
+    return x + 1 <= 3
 
 
 def left_check(x):
     # 左側が範囲内であることを示す
-    if x - 1 > -1:
-        return True
-    else:
-        return False
+    return x - 1 > -1
 
 
 def top_check(y):
     # 上が範囲内であることを示す
-    if y - 1 > -1:
-        return True
-    else:
-        return False
+    return y - 1 > -1
 
 
 def down_check(y):
     # 下側が範囲内であることを示す
-    if y + 1 < 5:
-        return True
-    else:
-        return False
-
+    return y + 1 < 5
 
 # 隣が−１か調べる関数(テスト済み)
+
+
 def vacant_check_right(rows, x1, y1):
-    if rows[y1, x1 + 1] == -1:
-        return True
-    else:
-        return False
+    return rows[y1, x1 + 1] == -1
 
 
 def vacant_check_left(rows, x1, y1):
-    if rows[y1, x1 - 1] == -1:
-        return True
-    else:
-        return False
+    return rows[y1, x1 - 1] == -1
 
 
 def vacant_check_top(rows, x1, y1):
-    if rows[y1 - 1, x1] == -1:
-        return True
-    else:
-        return False
+    return rows[y1 - 1, x1] == -1
 
 
 def vacant_check_down(rows, x1, y1):
-    if rows[y1 + 1, x1] == -1:
-        return True
-    else:
-        return False
+    return rows[y1 + 1, x1] == -1
 
 
 def nomal_left(rows, x1, y1):
-    rows = swap(rows, y1, x1, y1, x1 - 1)
-    return rows
+    return swap(rows, y1, x1, y1, x1 - 1)
 
 
 def nomal_right(rows, x1, y1):
-    rows = swap(rows, y1, x1, y1, x1 + 1)
-    return rows
+    return swap(rows, y1, x1, y1, x1 + 1)
 
 
 def nomal_top(rows, x1, y1):
-    rows = swap(rows, y1, x1, y1 - 1, x1)
-    return rows
+    return swap(rows, y1, x1, y1 - 1, x1)
 
 
 def nomal_down(rows, x1, y1):
-    rows = swap(rows, y1, x1, y1 + 1, x1)
-    return rows
+    return swap(rows, y1, x1, y1 + 1, x1)
 
 
 def nomal_swap(rows, x1, y1):

@@ -1,14 +1,6 @@
-# 現在の位置から移動できる数字を補足する
-# 移動できる数字を動かして
-# deque内の数字を全て動かす
-# 存在する盤面を調べる
-# グラフ醸造を作る
-#
 import musume
 import numpy as np
 from collections import deque
-
-# rowsを比較できるようにシンプルにするための関数
 
 
 def num_simple(rows, i):
@@ -33,8 +25,6 @@ def board_simple(rows):
     for i in range(10):
         rows = num_simple(rows, i)
     return rows
-
-# 動ける数字を判定する関数、動ける場合は動かせる数字を、動けない場合はNoneを返す
 
 
 def check_upside(rows, inputnumber):
@@ -481,8 +471,6 @@ def queue_state_append(moved_rows_list, board_state, board_queue):
 
 
 def breadth_search(rows):
-    n = 0
-
     # rows is copy
     rows_copy = np.copy(rows)
     # rowsを比較しやすい形にする
@@ -498,9 +486,6 @@ def breadth_search(rows):
     # board_queue が０になるまで実行する
 
     while len(board_queue) > 0:
-        n += 1
-        print("始点からの距離", n)
-
         # rows_nowにboard_queueから取り出したrowsを入れる
         rows_now = board_queue.popleft()
         # moved_rows_listに現在地点から展開できるノードを収納する
