@@ -36,26 +36,28 @@ def check_upside(rows, inputnumber):
     if inputnumber == 0:
         y2 = coordinate[2]
         x2 = coordinate[3]
-        if musume.doble_basic_top(rows, x1, y1, x2, y2):
+        if (musume.inrange_and_vacant_check_top(rows, y1, x1) and
+                musume.inrange_and_vacant_check_top(rows, y2, x2)):
             return inputnumber
         else:
             return None
     if inputnumber == 5:
         y2 = coordinate[2]
         x2 = coordinate[3]
-        if musume.doble_basic_top(rows, x1, y1, x2, y2):
+        if (musume.inrange_and_vacant_check_top(rows, y1, x1) and
+                musume.inrange_and_vacant_check_top(rows, y2, x2)):
             return inputnumber
         else:
             return None
 
     if 5 < inputnumber < 10:
-        if musume.basic_top(rows, x1, y1):
+        if musume.inrange_and_vacant_check_top(rows, y1, x1):
             return inputnumber
         else:
             return None
     else:
 
-        if musume.basic_top(rows, x1, y1):
+        if musume.inrange_and_vacant_check_top(rows, y1, x1):
             return inputnumber
         else:
             return None
@@ -70,7 +72,8 @@ def check_downside(rows, inputnumber):
     if inputnumber == 5:
         y2 = coordinate[2]
         x2 = coordinate[3]
-        if musume.doble_basic_down(rows, x1, y1, x2, y2):
+        if (musume.inrange_and_vacant_check_down(rows, y1, x1) and
+                musume.inrange_and_vacant_check_down(rows, y2, x2)):
             return inputnumber
         else:
             return None
@@ -79,20 +82,21 @@ def check_downside(rows, inputnumber):
         x3 = coordinate[5]
         y4 = coordinate[6]
         x4 = coordinate[7]
-        if musume.doble_basic_down(rows, x3, y3, x4, y4):
+        if (musume.inrange_and_vacant_check_down(rows, y3, x3) and
+                musume.inrange_and_vacant_check_down(rows, y4, x4)):
             return inputnumber
         else:
             return None
 
     if 5 < inputnumber < 10:
-        if musume.basic_down(rows, x1, y1):
+        if musume.inrange_and_vacant_check_down(rows, y1, x1):
             return inputnumber
         else:
             return None
     else:
         y2 = coordinate[2]
         x2 = coordinate[3]
-        if musume.basic_down(rows, x2, y2):
+        if musume.inrange_and_vacant_check_down(rows, y2, x2):
             return inputnumber
         else:
             return None
@@ -109,7 +113,8 @@ def check_rightside(rows, inputnumber):
         x2 = coordinate[3]
         y4 = coordinate[6]
         x4 = coordinate[7]
-        if musume.doble_basic_right(rows, x2, y2, x4, y4):
+        if (musume.inrange_and_vacant_check_right(rows, y2, x2) and
+                musume.inrange_and_vacant_check_right(rows, y4, x4)):
             return inputnumber
         else:
             return None
@@ -117,7 +122,8 @@ def check_rightside(rows, inputnumber):
     if 0 < inputnumber < 5:
         y2 = coordinate[2]
         x2 = coordinate[3]
-        if musume.doble_basic_right(rows, x1, y1, x2, y2):
+        if (musume.inrange_and_vacant_check_right(rows, y1, x1) and
+                musume.inrange_and_vacant_check_right(rows, y2, x2)):
             return inputnumber
         else:
             return None
@@ -125,13 +131,13 @@ def check_rightside(rows, inputnumber):
     if inputnumber == 5:
         y2 = coordinate[2]
         x2 = coordinate[3]
-        if musume.basic_right(rows, x2, y2):
+        if musume.inrange_and_vacant_check_right(rows, y2, x2):
             return inputnumber
         else:
             return None
 
     else:
-        if musume.basic_right(rows, x1, y1):
+        if musume.inrange_and_vacant_check_right(rows, y1, x1):
             return inputnumber
         else:
             return None
@@ -145,193 +151,27 @@ def check_leftside(rows, inputnumber):
     if inputnumber == 0:
         y3 = coordinate[4]
         x3 = coordinate[5]
-        if musume.doble_basic_left(rows, x1, y1, x3, y3):
+        if (musume.inrange_and_vacant_check_left(rows, y1, x1) and
+                musume.inrange_and_vacant_check_left(rows, y3, x3)):
             return inputnumber
         else:
             return None
     if 0 < inputnumber < 5:
         y2 = coordinate[2]
         x2 = coordinate[3]
-        if musume.doble_basic_left(rows, x1, y1, x2, y2):
+        if (musume.inrange_and_vacant_check_left(rows, y1, x1) and
+                musume.inrange_and_vacant_check_left(rows, y2, x2)):
             return inputnumber
         else:
             return None
     else:
-        if musume.basic_left(rows, x1, y1):
+        if musume.inrange_and_vacant_check_left(rows, y1, x1):
             return inputnumber
         else:
             return None
 
 
-def up_move(rows, i):
-    num = musume.area_check(rows, i)
-    coordinate = musume.split_number(num)
-
-    y1 = coordinate[0]
-    x1 = coordinate[1]
-    if check_upside(rows, i) is not None:
-
-        if i == 0:
-            rows_data = np.copy(rows)
-            y2 = coordinate[2]
-            x2 = coordinate[3]
-            y3 = coordinate[4]
-            x3 = coordinate[5]
-            y4 = coordinate[6]
-            x4 = coordinate[7]
-            return musume.musume_move_top(
-                rows_data,
-                x1, y1, x2, y2, x3, y3, x4, y4)
-
-        if (i == 1
-            or i == 2
-            or i == 3
-                or i == 4):
-            rows_data = np.copy(rows)
-            y2 = coordinate[2]
-            x2 = coordinate[3]
-            return musume.hight_move_top(rows_data, x1, y1, x2, y2)
-
-        if i == 5:
-            rows_data = np.copy(rows)
-            y2 = coordinate[2]
-            x2 = coordinate[3]
-            return musume.wide_move_top(rows_data, x1, y1, x2, y2)
-
-        if (i == 6
-            or i == 7
-            or i == 8
-                or i == 9):
-            rows_data = np.copy(rows)
-            return musume.nomal_top(rows_data, x1, y1)
-
-
-def down_move(rows, i):
-    num = musume.area_check(rows, i)
-    coordinate = musume.split_number(num)
-
-    y1 = coordinate[0]
-    x1 = coordinate[1]
-    if check_downside(rows, i) is not None:
-
-        if i == 0:
-            rows_data = np.copy(rows)
-            y2 = coordinate[2]
-            x2 = coordinate[3]
-            y3 = coordinate[4]
-            x3 = coordinate[5]
-            y4 = coordinate[6]
-            x4 = coordinate[7]
-            return musume.musume_move_downswap(
-                rows_data, x1, y1, x2, y2, x3, y3, x4, y4)
-
-        if (i == 1
-            or i == 2
-            or i == 3
-                or i == 4):
-            rows_data = np.copy(rows)
-            y2 = coordinate[2]
-            x2 = coordinate[3]
-            return musume.hight_move_down(rows_data, x1, y1, x2, y2)
-
-        if i == 5:
-            rows_data = np.copy(rows)
-            y2 = coordinate[2]
-            x2 = coordinate[3]
-            return musume.wide_move_down(rows_data, x1, y1, x2, y2)
-
-        if (i == 6
-            or i == 7
-            or i == 8
-                or i == 9):
-            rows_data = np.copy(rows)
-            return musume.nomal_down(rows_data, x1, y1)
-
-
-def right_move(rows, i):
-    num = musume.area_check(rows, i)
-    coordinate = musume.split_number(num)
-    y1 = coordinate[0]
-    x1 = coordinate[1]
-    if check_rightside(rows, i) is not None:
-
-        if i == 0:
-            rows_data = np.copy(rows)
-            y2 = coordinate[2]
-            x2 = coordinate[3]
-            y3 = coordinate[4]
-            x3 = coordinate[5]
-            y4 = coordinate[6]
-            x4 = coordinate[7]
-            return musume.musume_move_right(
-                rows_data, x1, y1, x2, y2, x3, y3, x4, y4)
-
-        if (i == 1
-            or i == 2
-            or i == 3
-                or i == 4):
-            rows_data = np.copy(rows)
-            y2 = coordinate[2]
-            x2 = coordinate[3]
-            return musume.hight_move_right(rows_data, x1, y1, x2, y2)
-
-        if i == 5:
-            rows_data = np.copy(rows)
-            y2 = coordinate[2]
-            x2 = coordinate[3]
-            return musume.wide_move_right(rows_data, x1, y1, x2, y2)
-
-        if (i == 6
-            or i == 7
-            or i == 8
-                or i == 9):
-            rows_data = np.copy(rows)
-
-            return musume.nomal_right(rows_data, x1, y1)
-
-
-def left_move(rows, i):
-    num = musume.area_check(rows, i)
-    coordinate = musume.split_number(num)
-
-    y1 = coordinate[0]
-    x1 = coordinate[1]
-    if check_leftside(rows, i) is not None:
-
-        if i == 0:
-            rows_data = np.copy(rows)
-            y2 = coordinate[2]
-            x2 = coordinate[3]
-            y3 = coordinate[4]
-            x3 = coordinate[5]
-            y4 = coordinate[6]
-            x4 = coordinate[7]
-            return musume.musume_move_left(
-                rows_data, x1, y1, x2, y2, x3, y3, x4, y4)
-
-        if (i == 1
-            or i == 2
-            or i == 3
-                or i == 4):
-            rows_data = np.copy(rows)
-            y2 = coordinate[2]
-            x2 = coordinate[3]
-            return musume.hight_move_left(rows_data, x1, y1, x2, y2)
-
-        if i == 5:
-            rows_data = np.copy(rows)
-            y2 = coordinate[2]
-            x2 = coordinate[3]
-            return musume.wide_move_left(rows_data, x1, y1, x2, y2)
-
-        if (i == 6
-            or i == 7
-            or i == 8
-                or i == 9):
-            rows_data = np.copy(rows)
-            return musume.nomal_left(rows_data, x1, y1)
-
-# 上に動かせる数字をリスト化
+# 動かせる数字をリスト化
 
 
 def up_movable_list(rows):
@@ -354,6 +194,7 @@ def down_movable_list(rows):
 
 def right_movable_list(rows):
     right_list = []
+
     for inputnumber in range(10):
         right_movable = check_rightside(rows, inputnumber)
         if right_movable is not None:
@@ -370,11 +211,180 @@ def left_movable_list(rows):
     return left_list
 
 
+def move_board_up(rows, i):
+    num = musume.area_check(rows, i)
+    coordinate = musume.split_number(num)
+
+    y1 = coordinate[0]
+    x1 = coordinate[1]
+    if check_upside(rows, i) is not None:
+
+        if i == 0:
+            rows_data = np.copy(rows)
+            y2 = coordinate[2]
+            x2 = coordinate[3]
+            y3 = coordinate[4]
+            x3 = coordinate[5]
+            y4 = coordinate[6]
+            x4 = coordinate[7]
+            return musume.move_2x2_to_top(
+                rows_data,
+                y1, x1, y2, x2, y3, x3, y4, x4)
+
+        if (i == 1
+            or i == 2
+            or i == 3
+                or i == 4):
+            rows_data = np.copy(rows)
+            y2 = coordinate[2]
+            x2 = coordinate[3]
+            return musume.move_2x1_to_top(rows_data, y1, x1, y2, x2)
+
+        if i == 5:
+            rows_data = np.copy(rows)
+            y2 = coordinate[2]
+            x2 = coordinate[3]
+            return musume.move_1x2_to_top(rows_data, y1, x1, y2, x2)
+
+        if (i == 6
+            or i == 7
+            or i == 8
+                or i == 9):
+            rows_data = np.copy(rows)
+            return musume.move_1x1_to_top(rows_data, y1, x1)
+
+
+def move_board_down(rows, i):
+    num = musume.area_check(rows, i)
+    coordinate = musume.split_number(num)
+
+    y1 = coordinate[0]
+    x1 = coordinate[1]
+    if check_downside(rows, i) is not None:
+
+        if i == 0:
+            rows_data = np.copy(rows)
+            y2 = coordinate[2]
+            x2 = coordinate[3]
+            y3 = coordinate[4]
+            x3 = coordinate[5]
+            y4 = coordinate[6]
+            x4 = coordinate[7]
+            return musume.move_2x2_to_down(
+                rows_data, y1, x1, y2, x2, y3, x3, y4, x4)
+
+        if (i == 1
+            or i == 2
+            or i == 3
+                or i == 4):
+            rows_data = np.copy(rows)
+            y2 = coordinate[2]
+            x2 = coordinate[3]
+            return musume.move_2x1_to_down(rows_data, y1, x1, y2, x2)
+
+        if i == 5:
+            rows_data = np.copy(rows)
+            y2 = coordinate[2]
+            x2 = coordinate[3]
+            return musume.move_1x2_to_down(rows_data, y1, x1, y2, x2)
+
+        if (i == 6
+            or i == 7
+            or i == 8
+                or i == 9):
+            rows_data = np.copy(rows)
+            return musume.move_1x1_to_down(rows_data, y1, x1)
+
+
+def move_board_right(rows, i):
+    num = musume.area_check(rows, i)
+    coordinate = musume.split_number(num)
+    y1 = coordinate[0]
+    x1 = coordinate[1]
+    if check_rightside(rows, i) is not None:
+
+        if i == 0:
+            rows_data = np.copy(rows)
+            y2 = coordinate[2]
+            x2 = coordinate[3]
+            y3 = coordinate[4]
+            x3 = coordinate[5]
+            y4 = coordinate[6]
+            x4 = coordinate[7]
+            return musume.move_2x2_to_right(
+                rows_data, y1, x1, y2, x2, y3, x3, y4, x4)
+
+        if (i == 1
+            or i == 2
+            or i == 3
+                or i == 4):
+            rows_data = np.copy(rows)
+            y2 = coordinate[2]
+            x2 = coordinate[3]
+            return musume.move_2x1_to_right(rows_data, y1, x1, y2, x2)
+
+        if i == 5:
+            rows_data = np.copy(rows)
+            y2 = coordinate[2]
+            x2 = coordinate[3]
+            return musume.move_1x2_to_right(rows_data, y1, x1, y2, x2)
+
+        if (i == 6
+            or i == 7
+            or i == 8
+                or i == 9):
+            rows_data = np.copy(rows)
+
+            return musume.move_1x1_to_right(rows_data, y1, x1)
+
+
+def move_board_left(rows, i):
+    num = musume.area_check(rows, i)
+    coordinate = musume.split_number(num)
+
+    y1 = coordinate[0]
+    x1 = coordinate[1]
+    if check_leftside(rows, i) is not None:
+
+        if i == 0:
+            rows_data = np.copy(rows)
+            y2 = coordinate[2]
+            x2 = coordinate[3]
+            y3 = coordinate[4]
+            x3 = coordinate[5]
+            y4 = coordinate[6]
+            x4 = coordinate[7]
+            return musume.move_2x2_to_left(
+                rows_data, y1, x1, y2, x2, y3, x3, y4, x4)
+
+        if (i == 1
+            or i == 2
+            or i == 3
+                or i == 4):
+            rows_data = np.copy(rows)
+            y2 = coordinate[2]
+            x2 = coordinate[3]
+            return musume.move_2x1_to_left(rows_data, y1, x1, y2, x2)
+
+        if i == 5:
+            rows_data = np.copy(rows)
+            y2 = coordinate[2]
+            x2 = coordinate[3]
+            return musume.move_1x2_to_left(rows_data, y1, x1, y2, x2)
+
+        if (i == 6
+            or i == 7
+            or i == 8
+                or i == 9):
+            rows_data = np.copy(rows)
+            return musume.move_1x1_to_left(rows_data, y1, x1)
+
+
 def move_up(rows):
     rows_list = []
     up_list = up_movable_list(rows)
     for i in up_list:
-        n = up_move(rows, i)
+        n = move_board_up(rows, i)
         rows_list.append(n)
     return rows_list
 
@@ -383,7 +393,7 @@ def move_down(rows):
     rows_list = []
     down_list = down_movable_list(rows)
     for i in down_list:
-        n = down_move(rows, i)
+        n = move_board_down(rows, i)
         rows_list.append(n)
     return rows_list
 
@@ -392,7 +402,7 @@ def move_right(rows):
     rows_list = []
     right_list = right_movable_list(rows)
     for i in right_list:
-        n = right_move(rows, i)
+        n = move_board_right(rows, i)
         rows_list.append(n)
     return rows_list
 
@@ -401,12 +411,12 @@ def move_left(rows):
     rows_list = []
     left_list = left_movable_list(rows)
     for i in left_list:
-        n = left_move(rows, i)
+        n = move_board_left(rows, i)
         rows_list.append(n)
     return rows_list
 
 
-def movable_list(rows):
+def moved_board_list(rows):
     movable = []
     up = move_up(rows)
     down = move_down(rows)
@@ -445,7 +455,7 @@ def movable_list(rows):
 
 def what_mache(simple_bord, board_state):
     for n in board_state:
-        if np.array_equal(n, simple_bord):
+        if np.all(n == simple_bord):
             return False
         else:
             continue
@@ -454,17 +464,11 @@ def what_mache(simple_bord, board_state):
 
 def queue_state_append(moved_rows_list, board_state, board_queue):
     for moved_rows in moved_rows_list:
-        # ノードを比較しやすい形に変換する
-        simple_borad = board_simple(moved_rows)
-        # 比較しやすい形にしたノードをboard_state(比較しやすくなったノードを入れてあるところ)
-        # のものと比較する
-        # 比較して、board_state内にsimple_boardがなければ リストとキューに追加
-        if what_mache(simple_borad, board_state):
+        simpled_borad = board_simple(moved_rows)
+        if what_mache(simpled_borad, board_state):
             print("追加したノード")
-            print(moved_rows)
-            print(simple_borad)
-
-            board_state.append(simple_borad)
+            print(simpled_borad)
+            board_state.append(simpled_borad)
             board_queue.append(moved_rows)
         else:
             continue
@@ -484,13 +488,20 @@ def breadth_search(rows):
     # 最初の盤面の変換した後を入れる
     board_state.append(rows_simple)
     # board_queue が０になるまで実行する
-
+    n = 1
     while len(board_queue) > 0:
+
+        print("視点から", n, "手先")
+        n += 1
         # rows_nowにboard_queueから取り出したrowsを入れる
         rows_now = board_queue.popleft()
         # moved_rows_listに現在地点から展開できるノードを収納する
-        moved_rows_list = movable_list(rows_now)
+        moved_rows_list = moved_board_list(rows_now)
 
         # 現在地点から展開できるノード一つ一つが今までに出てきているか確認する
         queue_state_append(moved_rows_list, board_state, board_queue)
+
+        m = len(board_state)
+        print("現在の盤面数は", m, "個です。")
+
     return board_state
