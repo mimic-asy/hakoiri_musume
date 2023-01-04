@@ -27,79 +27,101 @@ def board_simple(rows):
     return rows
 
 
-def check_upside(rows, inputnumber):
+def check_upside0_5(rows, inputnumber):
     num = musume.area_check(rows, inputnumber)
     coordinate = musume.split_number(num)
     y1 = coordinate[0]
     x1 = coordinate[1]
-
-    if inputnumber == 0:
-        y2 = coordinate[2]
-        x2 = coordinate[3]
-        if (musume.inrange_and_vacant_check_top(rows, y1, x1) and
-                musume.inrange_and_vacant_check_top(rows, y2, x2)):
-            return inputnumber
-        else:
-            return None
-    if inputnumber == 5:
-        y2 = coordinate[2]
-        x2 = coordinate[3]
-        if (musume.inrange_and_vacant_check_top(rows, y1, x1) and
-                musume.inrange_and_vacant_check_top(rows, y2, x2)):
-            return inputnumber
-        else:
-            return None
-
-    if 5 < inputnumber < 10:
-        if musume.inrange_and_vacant_check_top(rows, y1, x1):
-            return inputnumber
-        else:
-            return None
+    y2 = coordinate[2]
+    x2 = coordinate[3]
+    if (musume.inrange_and_vacant_check_top(rows, y1, x1) and
+            musume.inrange_and_vacant_check_top(rows, y2, x2)):
+        return inputnumber
     else:
+        return None
 
-        if musume.inrange_and_vacant_check_top(rows, y1, x1):
-            return inputnumber
-        else:
-            return None
+
+def check_upside1_9(rows, inputnumber):
+    num = musume.area_check(rows, inputnumber)
+    coordinate = musume.split_number(num)
+    y1 = coordinate[0]
+    x1 = coordinate[1]
+    if musume.inrange_and_vacant_check_top(rows, y1, x1):
+        return inputnumber
+    else:
+        return None
+
+
+def check_upside(rows, inputnumber):
+    if (inputnumber == 0
+            or inputnumber == 5):
+        return check_upside0_5(rows, inputnumber)
+    else:
+        return check_upside1_9(rows, inputnumber)
+
+
+def check_downside0(rows, inputnumber):
+    num = musume.area_check(rows, inputnumber)
+    coordinate = musume.split_number(num)
+    y3 = coordinate[4]
+    x3 = coordinate[5]
+    y4 = coordinate[6]
+    x4 = coordinate[7]
+    if (musume.inrange_and_vacant_check_down(rows, y3, x3) and
+            musume.inrange_and_vacant_check_down(rows, y4, x4)):
+        return inputnumber
+    else:
+        return None
+
+
+def check_downside5(rows, inputnumber):
+    num = musume.area_check(rows, inputnumber)
+    coordinate = musume.split_number(num)
+    y1 = coordinate[0]
+    x1 = coordinate[1]
+    y2 = coordinate[2]
+    x2 = coordinate[3]
+    if (musume.inrange_and_vacant_check_down(rows, y1, x1) and
+            musume.inrange_and_vacant_check_down(rows, y2, x2)):
+        return inputnumber
+    else:
+        return None
+
+
+def check_downside6_9(rows, inputnumber):
+    num = musume.area_check(rows, inputnumber)
+    coordinate = musume.split_number(num)
+    y1 = coordinate[0]
+    x1 = coordinate[1]
+    if musume.inrange_and_vacant_check_down(rows, y1, x1):
+        return inputnumber
+    else:
+        return None
+
+
+def check_downside1_4(rows, inputnumber):
+    num = musume.area_check(rows, inputnumber)
+    coordinate = musume.split_number(num)
+    y2 = coordinate[2]
+    x2 = coordinate[3]
+    if musume.inrange_and_vacant_check_down(rows, y2, x2):
+        return inputnumber
+    else:
+        return None
 
 
 def check_downside(rows, inputnumber):
-    num = musume.area_check(rows, inputnumber)
-    coordinate = musume.split_number(num)
-    y1 = coordinate[0]
-    x1 = coordinate[1]
-
     if inputnumber == 5:
-        y2 = coordinate[2]
-        x2 = coordinate[3]
-        if (musume.inrange_and_vacant_check_down(rows, y1, x1) and
-                musume.inrange_and_vacant_check_down(rows, y2, x2)):
-            return inputnumber
-        else:
-            return None
+        return check_downside5(rows, inputnumber)
+
     if inputnumber == 0:
-        y3 = coordinate[4]
-        x3 = coordinate[5]
-        y4 = coordinate[6]
-        x4 = coordinate[7]
-        if (musume.inrange_and_vacant_check_down(rows, y3, x3) and
-                musume.inrange_and_vacant_check_down(rows, y4, x4)):
-            return inputnumber
-        else:
-            return None
+        return check_downside0(rows, inputnumber)
 
     if 5 < inputnumber < 10:
-        if musume.inrange_and_vacant_check_down(rows, y1, x1):
-            return inputnumber
-        else:
-            return None
+        return check_downside6_9(rows, inputnumber)
+
     else:
-        y2 = coordinate[2]
-        x2 = coordinate[3]
-        if musume.inrange_and_vacant_check_down(rows, y2, x2):
-            return inputnumber
-        else:
-            return None
+        return check_downside1_4(rows, inputnumber)
 
 
 def check_rightside(rows, inputnumber):
