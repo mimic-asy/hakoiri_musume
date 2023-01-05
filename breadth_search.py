@@ -1,6 +1,8 @@
 import musume
 import numpy as np
 from collections import deque
+import networkx as nx
+import matplotlib.pyplot as plt
 
 
 def num_simple(rows, i):
@@ -484,14 +486,21 @@ def what_mache(simple_bord, board_state):
     return True
 
 
-def queue_state_append(moved_rows_list, board_state, board_queue):
+def queue_state_append(moved_rows_list, board_state,
+                       board_queue, simple_rows_now, edges):
+
     for moved_rows in moved_rows_list:
         simpled_borad = board_simple(moved_rows)
+        edge = zip(simpled_borad, simple_rows_now)
+        edges.append(edge)
+
         if what_mache(simpled_borad, board_state):
             print("追加したノード")
             print(simpled_borad)
+
             board_state.append(simpled_borad)
             board_queue.append(moved_rows)
+
         else:
             continue
 
@@ -499,6 +508,7 @@ def queue_state_append(moved_rows_list, board_state, board_queue):
 def breadth_search(rows):
     # rows is copy
     rows_copy = np.copy(rows)
+    edges = []
     # rowsを比較しやすい形にする
     rows_simple = board_simple(rows_copy)
     # board_state に　比較しやすい形のrowsを入れる
@@ -513,17 +523,46 @@ def breadth_search(rows):
     n = 1
     while len(board_queue) > 0:
 
-        print("視点から", n, "手先")
+        print("始発点から", n, "手先")
         n += 1
         # rows_nowにboard_queueから取り出したrowsを入れる
         rows_now = board_queue.popleft()
+        simple_rows_now = board_simple(rows_now)
         # moved_rows_listに現在地点から展開できるノードを収納する
         moved_rows_list = moved_board_list(rows_now)
 
         # 現在地点から展開できるノード一つ一つが今までに出てきているか確認する
-        queue_state_append(moved_rows_list, board_state, board_queue)
+        queue_state_append(moved_rows_list, board_state, board_queue,
+                           simple_rows_now, edges)
 
         m = len(board_state)
-        print("現在の盤面数は", m, "個です。")
+        x = len(edges)
 
-    return board_state
+        print("現在の盤面数は", m, "個です。")
+        print("現在のエッジの総数は", x, "本です")
+    return board_state, edges
+
+
+def networkx_dfs(rows):
+    board_state, edges = breadth_search(rows)
+
+    G = nx.Graph()
+    G.add_nodes_from(board_state)
+    G.add_edges_from(edges)
+    fig = plt.figure(figsize=(10, 8))
+    pos = nx.spring_layout(G, k=0.8)
+    nx.draw_networkx_edges(G, pos, edge_color='y')
+    nx.draw_networkx_nodes(G, pos, node_color='r', alpha=0.5)
+    nx.draw_networkx_labels(G, pos, font_size=10)
+
+    fig.savefig("network00.png")
+
+
+def network_x():
+    G = nx.Graph()
+    G.add_nodes_from([1, 2, 3])
+    G.add_edges_from([(1, 2), (1, 3), (2, 3)])
+    pos = nx.spring_layout(G, k=0.8)
+    nx.draw_networkx_edges(G, pos, edge_color='y')
+    nx.draw_networkx_nodes(G, pos, node_color='r', alpha=0.5)
+    nx.draw_networkx_labels(G, pos, font_size=10)
