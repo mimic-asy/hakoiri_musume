@@ -477,9 +477,11 @@ def moved_board_list(rows):
     return movable
 
 
-def what_mache(simple_bord, board_state):
+def what_mache(flat, board_state, one_before_flat, edges):
     for n in board_state:
-        if np.all(n == simple_bord):
+        if np.all(n == flat):
+            edge = zip(n, one_before_flat)
+            edges.append(edge)
             return False
         else:
             continue
@@ -491,17 +493,20 @@ def queue_state_append(moved_rows_list, board_state,
 
     for moved_rows in moved_rows_list:
         simpled_borad = board_simple(moved_rows)
-        edge = zip(simpled_borad, simple_rows_now)
-        edges.append(edge)
+        flat = "".join(map(str, simpled_borad.flatten()))
+        one_before_flat = "".join(map(str, simple_rows_now.flatten()))
 
-        if what_mache(simpled_borad, board_state):
+        if what_mache(flat, board_state, one_before_flat, edges):
             print("追加したノード")
             print(simpled_borad)
 
-            board_state.append(simpled_borad)
+            edge = zip(one_before_flat, flat)
+            edges.append(edge)
+            board_state.append(flat)
             board_queue.append(moved_rows)
 
         else:
+
             continue
 
 
@@ -518,11 +523,12 @@ def breadth_search(rows):
     # 最初の盤面の変換する前を入れる
     board_queue.append(rows_copy)
     # 最初の盤面の変換した後を入れる
-    board_state.append(rows_simple)
+    flat_rows = "".join(map(str, rows_simple.flatten()))
+    board_state.append(flat_rows)
     # board_queue が０になるまで実行する
     n = 1
     while len(board_queue) > 0:
-
+        # for i in range(1):
         print("始発点から", n, "手先")
         n += 1
         # rows_nowにboard_queueから取り出したrowsを入れる
@@ -549,6 +555,7 @@ def networkx_dfs(rows):
     G = nx.Graph()
     G.add_nodes_from(board_state)
     G.add_edges_from(edges)
+
     fig = plt.figure(figsize=(10, 8))
     pos = nx.spring_layout(G, k=0.8)
     nx.draw_networkx_edges(G, pos, edge_color='y')
@@ -556,13 +563,3 @@ def networkx_dfs(rows):
     nx.draw_networkx_labels(G, pos, font_size=10)
 
     fig.savefig("network00.png")
-
-
-def network_x():
-    G = nx.Graph()
-    G.add_nodes_from([1, 2, 3])
-    G.add_edges_from([(1, 2), (1, 3), (2, 3)])
-    pos = nx.spring_layout(G, k=0.8)
-    nx.draw_networkx_edges(G, pos, edge_color='y')
-    nx.draw_networkx_nodes(G, pos, node_color='r', alpha=0.5)
-    nx.draw_networkx_labels(G, pos, font_size=10)

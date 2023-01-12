@@ -4,5 +4,5 @@ import musume
 
 rows = musume.init_puzzle()
 
-
-bs.networkx_dfs(rows)
+bs.breadth_search(rows)
+# bs.networkx_dfs(rows)
