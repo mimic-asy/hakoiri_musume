@@ -1,6 +1,7 @@
 import musume
 import numpy as np
 from collections import deque
+import dfs
 
 
 def num_simple(rows, i):
@@ -491,10 +492,10 @@ def queue_state_append(moved_rows_list, board_state,
     for moved_rows in moved_rows_list:
 
         simpled_borad = board_simple(moved_rows)
-
-        if what_mache(simpled_borad, board_state):
+        hash_board = dfs.to_hashable(simpled_borad)
+        if hash_board not in board_state:
             the_one_before.append((rows_now, moved_rows))
-            board_state.append(simpled_borad)
+            board_state.add(hash_board)
             board_queue.append(moved_rows)
 
 
@@ -505,13 +506,13 @@ def breadth_search(rows):
     # rowsを比較しやすい形にする
     rows_simple = board_simple(rows_copy)
     # board_state に　比較しやすい形のrowsを入れる
-    board_state = []
+    board_state = set()
     # board_queue に　変換する前の盤面を入れる
     board_queue = deque()
     # 最初の盤面の変換する前を入れる
     board_queue.append(rows_copy)
     # 最初の盤面の変換した後を入れる)
-    board_state.append(rows_simple)
+    board_state.add(dfs.to_hashable(rows_simple))
     # board_queue が０になるまで実行する
     n = 1
 

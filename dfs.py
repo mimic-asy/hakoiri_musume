@@ -45,8 +45,9 @@ def dfs(rows):
                     # clearした場合
                     simple_n = bs.board_simple(n)
                     stack.append(n)
+                    stack_copy = np.copy(stack)
                     comparison_rows.add(to_hashable(simple_n))
-                    clear_route.append(stack)
+                    clear_route.append(stack_copy)
                     rows_now = n
                     print(n)
                     print(len(all_boards))
@@ -56,7 +57,6 @@ def dfs(rows):
                     stack.append(n)
                     # stackに点を追加
                     comparison_rows.add(to_hashable(simple_n))
-                    print(to_hashable(simple_n))
                     # 比較用リストに点を追加
                     all_boards.append(n)
                     # 盤面を保存するリストに追加
