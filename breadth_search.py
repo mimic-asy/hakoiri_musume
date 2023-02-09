@@ -1,8 +1,6 @@
 import musume
 import numpy as np
 from collections import deque
-import networkx as nx
-import matplotlib.pyplot as plt
 
 
 def num_simple(rows, i):
@@ -19,8 +17,8 @@ def num_simple(rows, i):
     if 5 < i:
         new_rows[before[0], before[1]] = 6
         return new_rows
-    else:
-        return new_rows
+
+    return new_rows
 
 
 def board_simple(rows):
@@ -477,11 +475,10 @@ def moved_board_list(rows):
     return movable
 
 
-def what_mache(flat, board_state, one_before_flat, edges):
+def what_mache(simpled_bored, board_state):
     for n in board_state:
-        if np.all(n == flat):
-            edge = zip(n, one_before_flat)
-            edges.append(edge)
+        if np.all(n == simpled_bored):
+
             return False
         else:
             continue
@@ -489,31 +486,22 @@ def what_mache(flat, board_state, one_before_flat, edges):
 
 
 def queue_state_append(moved_rows_list, board_state,
-                       board_queue, simple_rows_now, edges):
+                       board_queue, rows_now, the_one_before):
 
     for moved_rows in moved_rows_list:
+
         simpled_borad = board_simple(moved_rows)
-        flat = "".join(map(str, simpled_borad.flatten()))
-        one_before_flat = "".join(map(str, simple_rows_now.flatten()))
 
-        if what_mache(flat, board_state, one_before_flat, edges):
-            print("追加したノード")
-            print(simpled_borad)
-
-            edge = zip(one_before_flat, flat)
-            edges.append(edge)
-            board_state.append(flat)
+        if what_mache(simpled_borad, board_state):
+            the_one_before.append((rows_now, moved_rows))
+            board_state.append(simpled_borad)
             board_queue.append(moved_rows)
-
-        else:
-
-            continue
 
 
 def breadth_search(rows):
     # rows is copy
     rows_copy = np.copy(rows)
-    edges = []
+    the_one_before = []
     # rowsを比較しやすい形にする
     rows_simple = board_simple(rows_copy)
     # board_state に　比較しやすい形のrowsを入れる
@@ -522,44 +510,21 @@ def breadth_search(rows):
     board_queue = deque()
     # 最初の盤面の変換する前を入れる
     board_queue.append(rows_copy)
-    # 最初の盤面の変換した後を入れる
-    flat_rows = "".join(map(str, rows_simple.flatten()))
-    board_state.append(flat_rows)
+    # 最初の盤面の変換した後を入れる)
+    board_state.append(rows_simple)
     # board_queue が０になるまで実行する
     n = 1
+
     while len(board_queue) > 0:
-        # for i in range(1):
-        print("始発点から", n, "手先")
         n += 1
+        print(n)
         # rows_nowにboard_queueから取り出したrowsを入れる
         rows_now = board_queue.popleft()
-        simple_rows_now = board_simple(rows_now)
         # moved_rows_listに現在地点から展開できるノードを収納する
         moved_rows_list = moved_board_list(rows_now)
 
         # 現在地点から展開できるノード一つ一つが今までに出てきているか確認する
-        queue_state_append(moved_rows_list, board_state, board_queue,
-                           simple_rows_now, edges)
+        queue_state_append(moved_rows_list, board_state,
+                           board_queue, rows_now, the_one_before)
 
-        m = len(board_state)
-        x = len(edges)
-
-        print("現在の盤面数は", m, "個です。")
-        print("現在のエッジの総数は", x, "本です")
-    return board_state, edges
-
-
-def networkx_dfs(rows):
-    board_state, edges = breadth_search(rows)
-
-    G = nx.Graph()
-    G.add_nodes_from(board_state)
-    G.add_edges_from(edges)
-
-    fig = plt.figure(figsize=(10, 8))
-    pos = nx.spring_layout(G, k=0.8)
-    nx.draw_networkx_edges(G, pos, edge_color='y')
-    nx.draw_networkx_nodes(G, pos, node_color='r', alpha=0.5)
-    nx.draw_networkx_labels(G, pos, font_size=10)
-
-    fig.savefig("network00.png")
+    return board_state, the_one_before

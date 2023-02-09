@@ -37,6 +37,10 @@ rows_2x2_top = np.array(
     ]
 )
 
+the_one_before = [(rows1, rows_top), (rows_top, rows_2x2_top), (rows_2x2_top, rows)]
+
+moved_rows = rows1
+
 
 def test_area_check():
     assert musume.area_check(rows, 0) == [(0, 1), (0, 2), (1, 1), (1, 2)]
@@ -53,8 +57,7 @@ def test_area_check():
 
 
 def test_split_number():
-    assert musume.split_number(([(0, 1), (0, 2), (1, 1), (1, 2)])
-                               == [0, 1, 0, 2, 1, 1, 1, 2])
+
     assert musume.split_number([(0, 0), (1, 0)]) == [0, 0, 1, 0]
     assert musume.split_number([(0, 3), (1, 3)]) == [0, 3, 1, 3]
     assert musume.split_number([(2, 0), (3, 0)]) == [2, 0, 3, 0]
@@ -865,3 +868,16 @@ def test_move_left():
 
     assert np.all(a0 == b[0])
     assert np.all(a1 == b[1])
+
+
+def test_saintankan():
+
+    a = musume.saitankai(the_one_before)
+    print(rows1)
+    for i in a:
+        print("return is")
+        print(i)
+
+    assert np.all(a[0] == rows1)
+    assert np.all(a[1] == rows_top)
+    assert np.all(a[2] == rows_2x2_top)

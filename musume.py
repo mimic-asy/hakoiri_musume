@@ -38,6 +38,7 @@ def init_puzzle():
 
 def area_check(rows, val):
     assert -1 <= val <= 9
+
     yaxis, xaxis = np.where(rows == val)
     return [(y, x) for y, x in zip(yaxis, xaxis)]
 
@@ -235,3 +236,17 @@ def inrange_and_vacant_check_right(rows, y1, x1):
         return True
     else:
         return False
+
+
+def clear(moved_rows):
+    if (moved_rows[4, 1] == 0 and moved_rows[4, 2] == 0):
+        return True
+
+
+def saitankai(the_one_before):
+    shortest = []
+    for i in the_one_before:
+        print(i[1])
+        node = i[1]
+        shortest.append(node)
+    return shortest
