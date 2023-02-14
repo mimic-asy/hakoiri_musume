@@ -765,3 +765,16 @@ def route(the_one_before, moved_rows):
 def to_hashable(array):
     x = array.flatten()
     return ''.join(map(lambda i: chr(66-i), x))
+
+
+def shortest_path(clear_route):
+    len_all = []
+    for i in clear_route:
+        length = len(i)
+        len_all.append(length)
+
+    x = len_all.index(min(len_all))
+    print("最短手順は")
+    print(clear_route[x])
+    print("となります")
+    print("最短手は", min(len_all), "手です")

@@ -1,21 +1,23 @@
 
 import musume
 import breadth_search as bs
+import dfs
 
+# rowsに初期位置を入れる
 rows = musume.init_puzzle()
 
-short = []
 
+# 幅探索を回して、
 board_state, clear_route = bs.breadth_search(rows)
-print(len(board_state))
-print(len(clear_route))
+print("幅探索の結果、探索された盤面は")
+print(len(board_state), "個です。")
 
-for i in clear_route:
-    f = len(i)
-    short.append(f)
+# 深さ優先探索を回して、幅探索の結果と一致するか確認する
+dfs_reslut = dfs.dfs(rows)
+print("深さ優先探索の結果、探索された盤面は")
+print(dfs_reslut, "個です。")
 
-x = short.index(min(short))
-print("最短手順は")
-print(clear_route[x])
-print("となります")
-print("最短手は", min(short), "手です")
+if dfs_reslut == len(board_state):
+    print("深さ優先探索と幅優先探索の結果が一致しました。")
+    print("最短経路を出力します")
+    musume.shortest_path(clear_route)

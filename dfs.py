@@ -45,7 +45,6 @@ def dfs(rows):
                     clear_route.append(stack_copy)
                     rows_now = n
                     print(n)
-                    print(len(all_boards))
                     # スタック（これまでの道筋）を保存
 
                 else:
@@ -57,5 +56,5 @@ def dfs(rows):
                     # 盤面を保存するリストに追加
                     rows_now = n
                     # 現在地を更新
-                    print(len(all_boards))
-    return len(comparison_rows), clear_route
+
+    return len(comparison_rows)
