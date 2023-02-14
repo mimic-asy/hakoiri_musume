@@ -1,5 +1,4 @@
 import musume
-import breadth_search as bs
 import numpy as np
 
 # flake8: noqa
@@ -482,23 +481,23 @@ def test_board_simple():
             [6, -1, -1, 6],
         ]
     )
-    b = bs.board_simple(rows)
+    b = musume.board_simple(rows)
     assert np.all(a == b)
 
 
 def test_check_upside():
     rows2 = np.copy(rows1)
-    assert bs.check_upside(rows, 0) is None
-    assert bs.check_upside(rows, 1) is None
-    assert bs.check_upside(rows, 2) is None
-    assert bs.check_upside(rows, 3) is None
-    assert bs.check_upside(rows, 4) is None
-    assert bs.check_upside(rows, 5) is None
-    assert bs.check_upside(rows, 6) is None
-    assert bs.check_upside(rows, 7) is None
-    assert bs.check_upside(rows, 8) is None
-    assert bs.check_upside(rows, 9) is None
-    assert bs.check_upside(rows2, 5) == 5
+    assert musume.check_upside(rows, 0) is None
+    assert musume.check_upside(rows, 1) is None
+    assert musume.check_upside(rows, 2) is None
+    assert musume.check_upside(rows, 3) is None
+    assert musume.check_upside(rows, 4) is None
+    assert musume.check_upside(rows, 5) is None
+    assert musume.check_upside(rows, 6) is None
+    assert musume.check_upside(rows, 7) is None
+    assert musume.check_upside(rows, 8) is None
+    assert musume.check_upside(rows, 9) is None
+    assert musume.check_upside(rows2, 5) == 5
     a = np.array(
         [
             [1, -1, -1, 2],
@@ -508,7 +507,7 @@ def test_check_upside():
             [8, 5, 5, 9],
         ]
     )
-    assert bs.check_upside(a, 0) == 0
+    assert musume.check_upside(a, 0) == 0
     b = np.array(
         [
             [-1, 5, 5, -1],
@@ -518,8 +517,8 @@ def test_check_upside():
             [3, 8, 9, 4],
         ]
     )
-    assert bs.check_upside(b, 1) == 1
-    assert bs.check_upside(b, 2) == 2
+    assert musume.check_upside(b, 1) == 1
+    assert musume.check_upside(b, 2) == 2
     c = np.array(
         [
             [1, 5, 5, 2],
@@ -529,32 +528,32 @@ def test_check_upside():
             [3, 8, 9, 4],
         ]
     )
-    assert bs.check_upside(c, 3) == 3
-    assert bs.check_upside(c, 4) == 4
+    assert musume.check_upside(c, 3) == 3
+    assert musume.check_upside(c, 4) == 4
 
 
 def test_check_downside():
     rows2 = np.copy(rows1)
-    assert bs.check_downside(rows2, 0) == 0
-    assert bs.check_downside(rows2, 1) is None
-    assert bs.check_downside(rows2, 2) is None
-    assert bs.check_downside(rows2, 3) is None
-    assert bs.check_downside(rows2, 4) is None
-    assert bs.check_downside(rows2, 5) is None
-    assert bs.check_downside(rows2, 6) is None
-    assert bs.check_downside(rows2, 7) is None
-    assert bs.check_downside(rows2, 8) is None
-    assert bs.check_downside(rows2, 9) is None
-    assert bs.check_downside(rows, 0) is None
-    assert bs.check_downside(rows, 1) is None
-    assert bs.check_downside(rows, 2) is None
-    assert bs.check_downside(rows, 3) is None
-    assert bs.check_downside(rows, 4) is None
-    assert bs.check_downside(rows, 5) is None
-    assert bs.check_downside(rows, 6) == 6
-    assert bs.check_downside(rows, 7) == 7
-    assert bs.check_downside(rows, 8) is None
-    assert bs.check_downside(rows, 9) is None
+    assert musume.check_downside(rows2, 0) == 0
+    assert musume.check_downside(rows2, 1) is None
+    assert musume.check_downside(rows2, 2) is None
+    assert musume.check_downside(rows2, 3) is None
+    assert musume.check_downside(rows2, 4) is None
+    assert musume.check_downside(rows2, 5) is None
+    assert musume.check_downside(rows2, 6) is None
+    assert musume.check_downside(rows2, 7) is None
+    assert musume.check_downside(rows2, 8) is None
+    assert musume.check_downside(rows2, 9) is None
+    assert musume.check_downside(rows, 0) is None
+    assert musume.check_downside(rows, 1) is None
+    assert musume.check_downside(rows, 2) is None
+    assert musume.check_downside(rows, 3) is None
+    assert musume.check_downside(rows, 4) is None
+    assert musume.check_downside(rows, 5) is None
+    assert musume.check_downside(rows, 6) == 6
+    assert musume.check_downside(rows, 7) == 7
+    assert musume.check_downside(rows, 8) is None
+    assert musume.check_downside(rows, 9) is None
 
 
 def test_check_rightside():
@@ -565,16 +564,16 @@ def test_check_rightside():
         [3, 6, 7, 4],
         [9, -1, 8, -1],
     ])
-    assert bs.check_rightside(rows2, 0) is None
-    assert bs.check_rightside(rows2, 1) is None
-    assert bs.check_rightside(rows2, 2) is None
-    assert bs.check_rightside(rows2, 3) is None
-    assert bs.check_rightside(rows2, 4) is None
-    assert bs.check_rightside(rows2, 5) is None
-    assert bs.check_rightside(rows2, 6) is None
-    assert bs.check_rightside(rows2, 7) is None
-    assert bs.check_rightside(rows2, 8) == 8
-    assert bs.check_rightside(rows2, 9) == 9
+    assert musume.check_rightside(rows2, 0) is None
+    assert musume.check_rightside(rows2, 1) is None
+    assert musume.check_rightside(rows2, 2) is None
+    assert musume.check_rightside(rows2, 3) is None
+    assert musume.check_rightside(rows2, 4) is None
+    assert musume.check_rightside(rows2, 5) is None
+    assert musume.check_rightside(rows2, 6) is None
+    assert musume.check_rightside(rows2, 7) is None
+    assert musume.check_rightside(rows2, 8) == 8
+    assert musume.check_rightside(rows2, 9) == 9
 
 
 def test_check_leftside():
@@ -585,16 +584,16 @@ def test_check_leftside():
         [3, 6, 7, 4],
         [-1, 8, 9, -1],
     ])
-    assert bs.check_leftside(rows2, 0) is None
-    assert bs.check_leftside(rows2, 1) is None
-    assert bs.check_leftside(rows2, 2) is None
-    assert bs.check_leftside(rows2, 3) is None
-    assert bs.check_leftside(rows2, 4) is None
-    assert bs.check_leftside(rows2, 5) is None
-    assert bs.check_leftside(rows2, 6) is None
-    assert bs.check_leftside(rows2, 7) is None
-    assert bs.check_leftside(rows2, 8) == 8
-    assert bs.check_leftside(rows2, 9) is None
+    assert musume.check_leftside(rows2, 0) is None
+    assert musume.check_leftside(rows2, 1) is None
+    assert musume.check_leftside(rows2, 2) is None
+    assert musume.check_leftside(rows2, 3) is None
+    assert musume.check_leftside(rows2, 4) is None
+    assert musume.check_leftside(rows2, 5) is None
+    assert musume.check_leftside(rows2, 6) is None
+    assert musume.check_leftside(rows2, 7) is None
+    assert musume.check_leftside(rows2, 8) == 8
+    assert musume.check_leftside(rows2, 9) is None
 
 
 def test_up_movable_list():
@@ -605,7 +604,7 @@ def test_up_movable_list():
         [3, 5, 5, 4],
         [8, 7, 6, 9],
     ])
-    b = bs.up_movable_list(a)
+    b = musume.up_movable_list(a)
     c = [0]
     assert b == c
 
@@ -618,7 +617,7 @@ def test_down_movable_list():
         [3, 6, 7, 4],
         [8, -1, -1, 9],
     ])
-    b = bs.down_movable_list(a)
+    b = musume.down_movable_list(a)
     c = [6, 7]
     assert b == c
 
@@ -631,7 +630,7 @@ def test_right_movable_list():
         [3, 6, 7, 4],
         [8, -1, 9, -1],
     ])
-    b = bs.right_movable_list(a)
+    b = musume.right_movable_list(a)
     c = [8, 9]
     assert b == c
 
@@ -644,7 +643,7 @@ def test_left_movable_list():
         [3, 6, 7, 4],
         [-1, 8, -1, 9],
     ])
-    b = bs.left_movable_list(a)
+    b = musume.left_movable_list(a)
     c = [8, 9]
     assert b == c
 
@@ -665,7 +664,7 @@ def test_move_board_up():
         [8, 5, 5, 9],
     ])
     b1 = 0
-    c1 = bs.move_board_up(a1, b1)
+    c1 = musume.move_board_up(a1, b1)
     assert np.all(a2 == c1)
 
     a3 = np.array([
@@ -691,8 +690,8 @@ def test_move_board_up():
         [3, 5, 5, 9],
     ])
 
-    c2 = bs.move_board_up(a3, 1)
-    c3 = bs.move_board_up(a3, 7)
+    c2 = musume.move_board_up(a3, 1)
+    c3 = musume.move_board_up(a3, 7)
     assert np.all(c2 == a4)
     assert np.all(c3 == a5)
 
@@ -745,10 +744,10 @@ def test_move_board_down():
         [3, 0, 0, 9],
     ])
 
-    b = bs.move_board_down(a, 0)
-    b1_1 = bs.move_board_down(a, 3)
-    b1_2 = bs.move_board_down(a, 9)
-    b2 = bs.move_board_down(a2, 0)
+    b = musume.move_board_down(a, 0)
+    b1_1 = musume.move_board_down(a, 3)
+    b1_2 = musume.move_board_down(a, 9)
+    b2 = musume.move_board_down(a2, 0)
 
     assert np.all(b == a1)
     assert np.all(b1_1 == a1_1)
@@ -771,7 +770,7 @@ def test_move_board_right():
         [3, 6, 7, 4],
         [-1, 8, -1, 9],
     ])
-    b = bs.move_board_right(a, 9)
+    b = musume.move_board_right(a, 9)
     assert np.all(a2 == b)
 
 
@@ -783,7 +782,7 @@ def test_move_board_left():
         [3, 6, 7, 4],
         [8, -1, 9, -1],
     ])
-    b = bs.move_board_left(rows, 9)
+    b = musume.move_board_left(rows, 9)
     assert np.all(a == b)
 
 
@@ -804,7 +803,7 @@ def test_move_up():
         [8, 5, 5, 9],
     ])
     aa.append(a2)
-    b2 = bs.move_up(a1)
+    b2 = musume.move_up(a1)
     assert np.all(aa == b2[0])
 
 
@@ -824,7 +823,7 @@ def test_move_down():
         [8, -1, 7, 9],
     ])
 
-    b = bs.move_down(rows)
+    b = musume.move_down(rows)
     assert np.all(a == b[0])
     assert np.all(a2 == b[1])
 
@@ -837,7 +836,7 @@ def test_move_right():
         [3, 6, 7, 4],
         [-1, 8, -1, 9],
     ])
-    b = bs.move_right(rows)
+    b = musume.move_right(rows)
     assert np.all(a == b[0])
 
 
@@ -864,7 +863,7 @@ def test_move_left():
         [-1, 8, 9, -1],
     ])
 
-    b = bs.move_left(a)
+    b = musume.move_left(a)
 
     assert np.all(a0 == b[0])
     assert np.all(a1 == b[1])
