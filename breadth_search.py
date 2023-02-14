@@ -487,7 +487,8 @@ def what_mache(simpled_bored, board_state):
 
 
 def queue_state_append(moved_rows_list, board_state,
-                       board_queue, rows_now, the_one_before):
+                       board_queue, rows_now, the_one_before,
+                       clear_route):
 
     for moved_rows in moved_rows_list:
 
@@ -497,6 +498,20 @@ def queue_state_append(moved_rows_list, board_state,
             the_one_before.append((rows_now, moved_rows))
             board_state.add(hash_board)
             board_queue.append(moved_rows)
+            if musume.clear(moved_rows):
+                clear_route.append(route(the_one_before, moved_rows))
+
+
+def route(the_one_before, moved_rows):
+    new = moved_rows
+    one_route = []
+    one_route.append(new)
+    while len(the_one_before):
+        for mn in reversed(the_one_before):
+            if np.all(mn[1] == new):
+                one_route.append(mn[0])
+                new = mn[0]
+        return one_route
 
 
 def breadth_search(rows):
@@ -514,6 +529,7 @@ def breadth_search(rows):
     # 最初の盤面の変換した後を入れる)
     board_state.add(dfs.to_hashable(rows_simple))
     # board_queue が０になるまで実行する
+    clear_route = []
     n = 1
 
     while len(board_queue) > 0:
@@ -526,6 +542,7 @@ def breadth_search(rows):
 
         # 現在地点から展開できるノード一つ一つが今までに出てきているか確認する
         queue_state_append(moved_rows_list, board_state,
-                           board_queue, rows_now, the_one_before)
+                           board_queue, rows_now, the_one_before,
+                           clear_route)
 
-    return board_state, the_one_before
+    return board_state, clear_route

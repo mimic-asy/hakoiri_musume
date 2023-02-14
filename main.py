@@ -1,21 +1,21 @@
 
 import musume
-import dfs
-import numpy as np
 import breadth_search as bs
 
 rows = musume.init_puzzle()
 
+short = []
 
-bs.breadth_search(rows)
+board_state, clear_route = bs.breadth_search(rows)
+print(len(board_state))
+print(len(clear_route))
 
-a, b = dfs.dfs(rows)
-print("総盤面数は", a, "通りです")
-i = 0
-c = []
-for x in b:
-    n = len(x)
-    c.append(n)
-print(len(c))
-d = np.argmin(c)
-print(c[d])
+for i in clear_route:
+    f = len(i)
+    short.append(f)
+
+x = short.index(min(short))
+print("最短手順は")
+print(clear_route[x])
+print("となります")
+print("最短手は", min(short), "手です")

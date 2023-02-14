@@ -5,7 +5,7 @@ import breadth_search as bs
 
 def to_hashable(array):
     x = array.flatten()
-    return ''.join(map(str, x))
+    return ''.join(map(lambda i: chr(66-i), x))
 
 
 rows = musume.init_puzzle()
@@ -63,4 +63,4 @@ def dfs(rows):
                     rows_now = n
                     # 現在地を更新
                     print(len(all_boards))
-    return len(all_boards), clear_route
+    return len(comparison_rows), clear_route

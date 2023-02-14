@@ -877,7 +877,6 @@ def test_saintankan():
     for i in a:
         print("return is")
         print(i)
-
     assert np.all(a[0] == rows1)
     assert np.all(a[1] == rows_top)
     assert np.all(a[2] == rows_2x2_top)
