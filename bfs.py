@@ -3,7 +3,7 @@ import numpy as np
 from collections import deque
 
 
-def breadth_search(rows):
+def breadth_first_search(rows):
     # rows is copy
     rows_copy = np.copy(rows)
     the_one_before = []
@@ -19,11 +19,9 @@ def breadth_search(rows):
     board_state.add(musume.to_hashable(rows_simple))
     # board_queue が０になるまで実行する
     clear_route = []
-    n = 1
+    # clearに辿り着くまでの経路を入れる
 
     while len(board_queue) > 0:
-        n += 1
-        print(n)
         # rows_nowにboard_queueから取り出したrowsを入れる
         rows_now = board_queue.popleft()
         # moved_rows_listに現在地点から展開できるノードを収納する

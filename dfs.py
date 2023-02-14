@@ -1,12 +1,11 @@
 import musume
 import numpy as np
-import breadth_search as bs
 
 
 rows = musume.init_puzzle()
 
 
-def dfs(rows):
+def depth_first_search(rows):
     stack = []
     # 取り出す盤面（変換前）を入れる
     clear_route = []
@@ -16,7 +15,7 @@ def dfs(rows):
     all_boards = []
     # 全ての盤面を保存する
     rows_copy = np.copy(rows)
-    simple_rows = bs.board_simple(rows_copy)
+    simple_rows = musume.board_simple(rows_copy)
     # 比較用の変換後の初期位置を作成
     stack.append(rows_copy)
     comparison_rows.add(musume.to_hashable(simple_rows))
@@ -39,12 +38,13 @@ def dfs(rows):
                 if musume.clear(n):
                     # clearした場合
                     simple_n = musume.board_simple(n)
+                    # 盤面を比較できるように変換
                     stack.append(n)
+                    # クリアした盤面の形をstackに保存
                     stack_copy = np.copy(stack)
                     comparison_rows.add(musume.to_hashable(simple_n))
                     clear_route.append(stack_copy)
                     rows_now = n
-                    print(n)
                     # スタック（これまでの道筋）を保存
 
                 else:

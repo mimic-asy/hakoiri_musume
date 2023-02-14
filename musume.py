@@ -237,19 +237,12 @@ def inrange_and_vacant_check_right(rows, y1, x1):
     else:
         return False
 
+# ここより下は探索に必要な関数
+
 
 def clear(moved_rows):
     if (moved_rows[4, 1] == 0 and moved_rows[4, 2] == 0):
         return True
-
-
-def saitankai(the_one_before):
-    shortest = []
-    for i in the_one_before:
-        print(i[1])
-        node = i[1]
-        shortest.append(node)
-    return shortest
 
 
 def num_simple(rows, i):
@@ -724,16 +717,6 @@ def moved_board_list(rows):
     return movable
 
 
-def what_mache(simpled_bored, board_state):
-    for n in board_state:
-        if np.all(n == simpled_bored):
-
-            return False
-        else:
-            continue
-    return True
-
-
 def queue_state_append(moved_rows_list, board_state,
                        board_queue, rows_now, the_one_before,
                        clear_route):
@@ -772,9 +755,4 @@ def shortest_path(clear_route):
     for i in clear_route:
         length = len(i)
         len_all.append(length)
-
-    x = len_all.index(min(len_all))
-    print("最短手順は")
-    print(clear_route[x])
-    print("となります")
-    print("最短手は", min(len_all), "手です")
+    return len_all.index(min(len_all))
